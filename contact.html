@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Medicus</title>
+    <meta name="description" content="Talk to Medicus about setting up your hospital, polyclinic or diagnostic centre.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="brand">
+                <svg class="brand__pulse" viewBox="0 0 64 24" width="34" height="14" aria-hidden="true">
+                    <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor"
+                        stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Medicus
+            </a>
+            <nav class="nav__links" id="navLinks">
+                <a href="index.html#day">How it runs</a>
+                <a href="index.html#roles">Roles</a>
+                <a href="features.html">Product</a>
+                <a href="index.html#security">Security</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="nav__actions">
+                <a href="#" class="link-btn">Log in</a>
+                <a href="#contact-form" class="btn btn--primary btn--sm">Start free</a>
+                <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero__inner">
+            <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
+            <h1>Tell us about your hospital, we'll set it up with you.</h1>
+            <p>Whether you want to start on the free plan today or need an Enterprise
+                setup across branches, a real person will get back to you — not a queue.</p>
+        </div>
+    </section>
+
+    <main>
+        <section id="contact-form">
+            <div class="contact-layout">
+
+                <div class="contact-info">
+                    <h3>Before you write in</h3>
+                    <p>Most hospitals can sign up and be running OPD on the free plan the
+                        same day, without talking to anyone first. Reach out here if you'd
+                        rather be walked through it, or you're evaluating for a group of
+                        hospitals.</p>
+
+                    <div class="contact-detail">
+                        <h4>Sales &amp; onboarding</h4>
+                        <p>hello@medicus.app</p>
+                    </div>
+                    <div class="contact-detail">
+                        <h4>Support (existing hospitals)</h4>
+                        <p>Raise a ticket from Admin → Support inside your account for the fastest response.</p>
+                    </div>
+                    <div class="contact-detail">
+                        <h4>Response time</h4>
+                        <p>Within one business day for sales enquiries; support tickets are triaged same day.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-success" id="formSuccess">Thanks — we've got your details and will be in touch
+                        shortly.</div>
+                    <form class="form" id="contactForm" novalidate>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="name">Full name</label>
+                                <input type="text" id="name" name="name" placeholder="Dr. Anjali Rao" required>
+                            </div>
+                            <div class="field">
+                                <label for="email">Work email</label>
+                                <input type="email" id="email" name="email" placeholder="you@yourhospital.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+91 98xxxxxxx">
+                            </div>
+                            <div class="field">
+                                <label for="type">Facility type</label>
+                                <select id="type" name="type">
+                                    <option>Hospital</option>
+                                    <option>Polyclinic</option>
+                                    <option>Diagnostic centre</option>
+                                    <option>Hospital group / multi‑branch</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="message">What are you looking to set up?</label>
+                            <textarea id="message" name="message"
+                                placeholder="Tell us about your hospital — number of doctors, whether you run inpatient care, and anything you'd like to see first."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary">Send message</button>
+                        <p class="form-note">We'll only use these details to get in touch about Medicus.</p>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <a href="index.html" class="brand brand--footer">
+                    <svg class="brand__pulse" viewBox="0 0 64 24" width="30" height="12" aria-hidden="true">
+                        <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor"
+                            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Medicus
+                </a>
+                <p>Practice and hospital management for teams who run one patient record, not five.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Product</h4>
+                <a href="index.html#day">How it runs</a>
+                <a href="features.html">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="index.html#security">Security</a>
+            </div>
+            <div class="footer__col">
+                <h4>Solutions</h4>
+                <a href="features.html#doctor">Hospitals</a>
+                <a href="features.html#frontdesk">Polyclinics</a>
+                <a href="features.html#admin">Diagnostic centres</a>
+            </div>
+            <div class="footer__col">
+                <h4>Company</h4>
+                <a href="contact.html">Contact</a>
+                <a href="pricing.html#faq">Pricing FAQ</a>
+                <a href="index.html#faq">Product FAQ</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© 2026 Medicus. All rights reserved.</span>
+            <span>Made for hospitals, polyclinics and diagnostic centres.</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

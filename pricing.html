@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — Medicus</title>
+    <meta name="description"
+        content="Start free, upgrade when you need more seats or inpatient features. Plan comparison for Medicus hospital management software.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="brand">
+                <svg class="brand__pulse" viewBox="0 0 64 24" width="34" height="14" aria-hidden="true">
+                    <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor"
+                        stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Medicus
+            </a>
+            <nav class="nav__links" id="navLinks">
+                <a href="index.html#day">How it runs</a>
+                <a href="index.html#roles">Roles</a>
+                <a href="features.html">Product</a>
+                <a href="index.html#security">Security</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="nav__actions">
+                <a href="#" class="link-btn">Log in</a>
+                <a href="contact.html" class="btn btn--primary btn--sm">Start free</a>
+                <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero__inner">
+            <div class="breadcrumb"><a href="index.html">Home</a> / Pricing</div>
+            <h1>Start free. Pay only once you need more.</h1>
+            <p>Every hospital signs up onto the free plan automatically — no card, no
+                sales call. Upgrade from Admin → Subscription whenever a locked page or
+                a full seat count says it's time.</p>
+        </div>
+    </section>
+
+    <main>
+
+        <!-- ============ PLAN CARDS ============ -->
+        <section class="pricing" id="plans">
+            <div class="plan-grid">
+                <div class="plan">
+                    <h3>Free</h3>
+                    <p class="plan__desc">For a single clinic finding its feet.</p>
+                    <ul class="plan__list">
+                        <li>Front desk, doctor and admin logins</li>
+                        <li>OPD queue, booking and walk‑ins</li>
+                        <li>Visit Pad and finalised prescriptions</li>
+                        <li>Billing from the appointment</li>
+                        <li>Limited staff seats</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn--outline">Start free</a>
+                </div>
+
+                <div class="plan plan--highlight">
+                    <div class="plan__badge">Most hospitals land here</div>
+                    <h3>Growth</h3>
+                    <p class="plan__desc">For a hospital running OPD and IPD together.</p>
+                    <ul class="plan__list">
+                        <li>Everything in Free</li>
+                        <li>Inpatient admissions, beds and discharge</li>
+                        <li>Lab ordering and result review</li>
+                        <li>WhatsApp reminders, OTP and invoices</li>
+                        <li>Doctor referrals, online and offline</li>
+                        <li>More staff seats</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn--primary">Start free</a>
+                </div>
+
+                <div class="plan">
+                    <h3>Enterprise</h3>
+                    <p class="plan__desc">For hospital groups and diagnostic chains.</p>
+                    <ul class="plan__list">
+                        <li>Everything in Growth</li>
+                        <li>Multi‑branch and higher seat caps</li>
+                        <li>ABDM / ABHA and HFR configuration</li>
+                        <li>Data Hub import/export at scale</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn--outline">Talk to us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ COMPARISON TABLE ============ -->
+        <section id="compare">
+            <div class="section-head is-centered">
+                <h2>Compare plans in detail</h2>
+            </div>
+            <div class="compare-wrap">
+                <table class="compare">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Free</th>
+                            <th>Growth</th>
+                            <th>Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Staff seats</th>
+                            <td>Limited</td>
+                            <td>Standard</td>
+                            <td>Custom</td>
+                        </tr>
+                        <tr>
+                            <th>OPD queue &amp; booking</th>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>Visit Pad &amp; prescriptions</th>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>OPD billing</th>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>Lab ordering &amp; results</th>
+                            <td class="no">—</td>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>Inpatient admission, beds, discharge</th>
+                            <td class="no">—</td>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>WhatsApp notifications</th>
+                            <td class="no">—</td>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>Doctor referrals (video &amp; offline)</th>
+                            <td class="no">—</td>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>Data Hub import/export</th>
+                            <td class="no">—</td>
+                            <td class="yes">✓</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>Multi‑branch tenants</th>
+                            <td class="no">—</td>
+                            <td class="no">—</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>ABDM / ABHA &amp; HFR</th>
+                            <td class="no">—</td>
+                            <td class="no">—</td>
+                            <td class="yes">✓</td>
+                        </tr>
+                        <tr>
+                            <th>Support</th>
+                            <td>Community</td>
+                            <td>Standard</td>
+                            <td>Priority</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============ PRICING FAQ ============ -->
+        <section id="faq">
+            <div class="section-head is-centered">
+                <h2>Pricing questions</h2>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What happens when a feature is locked on our plan?</summary>
+                    <p>You'll see a locked page in the navigation instead of a broken one — clicking it explains what
+                        the feature does and takes you to upgrade. Nothing fails silently.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What happens when we run out of seats?</summary>
+                    <p>New staff invites are blocked until you either deactivate an existing seat to free one up, or
+                        upgrade to a plan with more seats.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can we downgrade later?</summary>
+                    <p>Yes, from Admin → Subscription. Downgrading may re‑lock features tied to the higher plan, so
+                        anything actively in use is worth reviewing first.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is there a setup fee?</summary>
+                    <p>No. Signup assigns the free plan automatically with no payment step. You only pay when you choose
+                        to upgrade.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you offer pricing per hospital group?</summary>
+                    <p>Yes — Enterprise plans are set up for multi‑branch hospital groups and diagnostic chains. Talk to
+                        us for a plan that matches your number of branches and seats.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="cta__inner">
+                <h2>Your hospital's free workspace is a few minutes away.</h2>
+                <p>No card, no sales call required to start on the free plan.</p>
+                <div class="cta__actions">
+                    <a href="#" class="btn btn--primary btn--lg">Create your free hospital</a>
+                    <a href="contact.html" class="btn btn--ghost-dark btn--lg">Talk to sales</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <a href="index.html" class="brand brand--footer">
+                    <svg class="brand__pulse" viewBox="0 0 64 24" width="30" height="12" aria-hidden="true">
+                        <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor"
+                            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Medicus
+                </a>
+                <p>Practice and hospital management for teams who run one patient record, not five.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Product</h4>
+                <a href="index.html#day">How it runs</a>
+                <a href="features.html">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="index.html#security">Security</a>
+            </div>
+            <div class="footer__col">
+                <h4>Solutions</h4>
+                <a href="features.html#doctor">Hospitals</a>
+                <a href="features.html#frontdesk">Polyclinics</a>
+                <a href="features.html#admin">Diagnostic centres</a>
+            </div>
+            <div class="footer__col">
+                <h4>Company</h4>
+                <a href="contact.html">Contact</a>
+                <a href="pricing.html#faq">Pricing FAQ</a>
+                <a href="index.html#faq">Product FAQ</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© 2026 Medicus. All rights reserved.</span>
+            <span>Made for hospitals, polyclinics and diagnostic centres.</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
