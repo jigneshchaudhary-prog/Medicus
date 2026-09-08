@@ -1,295 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicus — Practice & Hospital Management SaaS</title>
-    <meta name="description" content="Multi-tenant hospital, clinic, and diagnostic-center SaaS. Run your entire facility from one isolated login.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicus | Multi-Tenant Hospital & Clinic OS</title>
+  <meta name="description" content="Run your entire hospital, polyclinic, or diagnostic center on a single unified platform. Designed for how Indian healthcare actually works.">
+  <meta name="robots" content="index, follow">
+  
+  <!-- [PLACEHOLDER: canonical url] -->
+  <link rel="canonical" href="https://medicus.com/">
+  <!-- [PLACEHOLDER: favicon set] -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://medicus.com/">
+  <meta property="og:title" content="Medicus | Multi-Tenant Hospital OS">
+  <meta property="og:description" content="Run your entire hospital, polyclinic, or diagnostic center on a single unified platform.">
+  <!-- [PLACEHOLDER: real OG image path] -->
+  <meta property="og:image" content="https://medicus.com/assets/og-image.jpg">
+  <meta property="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Preconnected & swapped) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Medicus",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "WebBrowser",
+    "description": "Multi-tenant Hospital & Clinic OS for the Indian healthcare market.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  }
+  </script>
 </head>
 <body>
 
-    <!-- Cinematic Breathing Background -->
-    <div id="ambient-bg"></div>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcementBar">
+    <p>Now live: WhatsApp-based OTP patient registration <a href="/features.html">Learn more &rarr;</a></p>
+    <button aria-label="Dismiss announcement" id="closeAnnouncement">&times;</button>
+  </div>
 
-    <!-- ============ NAV ============ -->
-    <header class="nav" id="nav">
-        <div class="nav__inner">
-            <a href="#top" class="brand">
-                <svg class="brand__pulse" viewBox="0 0 64 24" width="34" height="14" aria-hidden="true">
-                    <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                Medicus
-            </a>
-            <nav class="nav__links" id="navLinks">
-                <a href="#chains">Clinical Chains</a>
-                <a href="#roles">Roles</a>
-                <a href="#features">Platform</a>
-                <a href="#pricing">Pricing</a>
-            </nav>
-            <div class="nav__actions">
-                <a href="#" class="link-btn">Log in</a>
-                <a href="#pricing" class="btn btn--primary btn--sm">Start free</a>
-                <button class="nav__toggle" id="navToggle" aria-label="Open menu">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+  <!-- Sticky Nav -->
+  <header class="site-header" id="siteNav">
+    <div id="scroll-progress-bar"></div>
+    <div class="nav-container">
+      <a href="/" class="brand-logo" aria-label="Medicus Home">
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span>Medicus</span>
+      </a>
+      
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#tour">Tour</a></li>
+          <li><a href="#roles">Roles</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions desktop-actions">
+        <a href="/login" class="nav-login">Log in</a>
+        <a href="contact.html" class="btn btn-primary">Book a demo</a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <svg aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Slide-out Panel -->
+    <div class="mobile-menu-panel" id="mobileMenuPanel" aria-hidden="true">
+      <nav aria-label="Mobile Navigation">
+        <ul class="mobile-nav-links">
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#tour">Tour</a></li>
+          <li><a href="#roles">Roles</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <a href="/login" class="btn btn-secondary">Log in</a>
+          <a href="contact.html" class="btn btn-primary">Book a demo</a>
         </div>
-    </header>
+      </nav>
+    </div>
+  </header>
 
-    <main id="top">
-        <!-- ============ HERO 3D ============ -->
-        <section class="hero perspective-container">
-            <div class="hero__inner card-3d scroll-reveal-3d">
-                <div class="hero__copy inner-3d">
-                    <h1 class="inner-stagger">One login, and the <em>whole day's clinic</em> behind it.</h1>
-                    <p class="hero__sub inner-stagger">
-                        Medicus is a multi-tenant hospital and clinic SaaS. We connect registration, the queue, consults, billing, lab, and inpatient care into a single, fully isolated patient record.
-                    </p>
-                    <div class="hero__cta inner-stagger">
-                        <a href="#pricing" class="btn btn--primary">Create Hospital Workspace</a>
-                        <a href="#chains" class="btn btn--ghost">Explore the flow ↓</a>
-                    </div>
-                </div>
-
-                <div class="hero__panel inner-stagger">
-                    <div class="frame">
-                        <div class="frame__tabs" id="frameTabs">
-                            <button class="frame__tab is-active" data-panel="panel-queue">Queue Board</button>
-                            <button class="frame__tab" data-panel="panel-pad">Visit Pad</button>
-                            <button class="frame__tab" data-panel="panel-ipd">IPD Desk</button>
-                            <button class="frame__tab" data-panel="panel-bill">Billing</button>
-                        </div>
-                        <div class="frame__panel is-active" id="panel-queue">
-                            <div class="frame__head">
-                                <span class="frame__title">Dr. Rao · OPD</span>
-                                <span class="frame__meta">Today</span>
-                            </div>
-                            <div class="queue-row"><span class="queue-row__token">11</span><span class="queue-row__name">A. Sharma</span><span class="chip chip--emerald" data-status>Reviewed</span></div>
-                            <div class="queue-row"><span class="queue-row__token">12</span><span class="queue-row__name">R. Iyer</span><span class="chip chip--teal" data-status>On-going</span></div>
-                            <div class="queue-row"><span class="queue-row__token">13</span><span class="queue-row__name">K. Verma</span><span class="chip chip--amber" data-status>Arrived</span></div>
-                        </div>
-                        <div class="frame__panel" id="panel-pad">
-                            <div class="frame__head"><span class="frame__title">Rx · R. Iyer</span></div>
-                            <div class="pad-lines">
-                                <div class="pad-line" style="width: 40%"></div>
-                                <div class="pad-line" style="width: 85%"></div>
-                                <div class="pad-line" style="width: 70%"></div>
-                                <span class="pad-tag">Draft</span>
-                            </div>
-                        </div>
-                        <div class="frame__panel" id="panel-ipd">
-                            <div class="frame__head"><span class="frame__title">Ward Masters</span></div>
-                            <div class="bed-grid">
-                                <div class="bed-cell occupied">Bed 4A</div>
-                                <div class="bed-cell occupied">Bed 4B</div>
-                                <div class="bed-cell">Bed 5A</div>
-                                <div class="bed-cell occupied">Bed 5B</div>
-                            </div>
-                        </div>
-                        <div class="frame__panel" id="panel-bill">
-                            <div class="frame__head"><span class="frame__title">Invoice · Token 11</span></div>
-                            <div class="invoice-row"><span>Consultation</span><span>₹600</span></div>
-                            <div class="invoice-row"><span>ECG</span><span>₹450</span></div>
-                            <div class="invoice-total"><span>Total</span><span>₹1,102</span></div>
-                        </div>
-                    </div>
-                    <div class="hero__badge inner-3d">
-                        <span class="hero__badge-dot"></span> Tenant Isolated
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ STATS 3D ============ -->
-        <section class="perspective-container">
-            <div class="stats card-3d scroll-reveal-3d">
-                <div class="stats-grid inner-3d">
-                    <div class="stat inner-stagger"><div class="stat__num">2</div><div class="stat__label">Clinical chains (OPD & IPD)</div></div>
-                    <div class="stat inner-stagger"><div class="stat__num">5</div><div class="stat__label">Role-built UI surfaces</div></div>
-                    <div class="stat inner-stagger"><div class="stat__num">4</div><div class="stat__label">Fixed queue states</div></div>
-                    <div class="stat inner-stagger"><div class="stat__num">0</div><div class="stat__label">Payment at signup</div></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ CLINICAL CHAINS 3D ============ -->
-        <section id="chains" class="perspective-container">
-            <div class="section-head scroll-reveal-3d">
-                <h2 class="inner-stagger">No separate system. The prescription <em>is</em> the visit.</h2>
-            </div>
-            <div class="chains">
-                <div class="chain card-3d scroll-reveal-3d">
-                    <div class="chain__label inner-3d inner-stagger">Outpatient (OPD)</div>
-                    <ol class="chain__flow inner-3d inner-stagger">
-                        <li><span class="chain__node">Patient</span></li>
-                        <li class="chain__arrow"></li>
-                        <li><span class="chain__node">Appointment</span></li>
-                        <li class="chain__arrow"></li>
-                        <li><span class="chain__node chain__node--accent">Rx<br><small>Visit Pad</small></span></li>
-                        <li class="chain__arrow"></li>
-                        <li><span class="chain__node">Invoice</span></li>
-                    </ol>
-                    <div class="chain__branch inner-3d inner-stagger">
-                        <span class="chain__branch-line"></span>
-                        Lab order → Lab Result feeds back into the visit.
-                    </div>
-                </div>
-
-                <div class="chain card-3d scroll-reveal-3d">
-                    <div class="chain__label inner-3d inner-stagger">Inpatient (IPD)</div>
-                    <ol class="chain__flow inner-3d inner-stagger">
-                        <li><span class="chain__node">Patient</span></li>
-                        <li class="chain__arrow"></li>
-                        <li><span class="chain__node">Admission</span></li>
-                        <li class="chain__arrow"></li>
-                        <li><span class="chain__node">Bed Assign</span></li>
-                        <li class="chain__arrow"></li>
-                        <li><span class="chain__node chain__node--accent">Bedside Visit<br><small>+ Rx</small></span></li>
-                        <li class="chain__arrow"></li>
-                        <li><span class="chain__node">Discharge</span></li>
-                    </ol>
-                    <div class="chain__branch inner-3d inner-stagger">
-                        <span class="chain__branch-line"></span>
-                        Discharge blocked if unbilled charges remain.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ ROLES 3D ============ -->
-        <section id="roles" class="perspective-container">
-            <div class="section-head scroll-reveal-3d">
-                <h2 class="inner-stagger">Hard rule: One role → One UI surface.</h2>
-                <p class="inner-stagger">Every desk logs into the surface built for what they actually do. (Admin includes a fast-switcher for all hospital views).</p>
-            </div>
-            <div class="role-switch scroll-reveal-3d">
-                <div class="role-tabs inner-stagger" id="roleTabs">
-                    <button class="role-tab card-3d is-active" data-role="doctor"><span class="role-tab__bar"></span><h4>Doctor</h4></button>
-                    <button class="role-tab card-3d" data-role="frontdesk"><span class="role-tab__bar"></span><h4>Front Desk</h4></button>
-                    <button class="role-tab card-3d" data-role="admin"><span class="role-tab__bar"></span><h4>Admin</h4></button>
-                    <button class="role-tab card-3d" data-role="super"><span class="role-tab__bar"></span><h4>Super Admin</h4></button>
-                </div>
-                <div class="role-panels card-3d inner-stagger">
-                    <div class="role-panel is-active inner-3d" id="role-doctor">
-                        <h3>Doctor Workspace</h3>
-                        <p>Runs the day's queue, writes diagnosis on the Visit Pad, and executes IPD bedside visits.</p>
-                        <ul class="role-panel__list">
-                            <li>Visit Pad (Draft & Finalise Rx)</li>
-                            <li>Lab ordering & result review</li>
-                            <li>Refer a Doctor (LiveKit Video)</li>
-                        </ul>
-                    </div>
-                    <div class="role-panel inner-3d" id="role-frontdesk">
-                        <h3>Front Desk</h3>
-                        <p>Registers patients, walks them in, manages the queue board, and handles all OPD/IPD billing.</p>
-                        <ul class="role-panel__list">
-                            <li>Tokens assigned ONLY on create</li>
-                            <li>Queue: Booked → Arrived → On-going</li>
-                            <li>IPD Admit, allocate bed, schedule</li>
-                        </ul>
-                    </div>
-                    <div class="role-panel inner-3d" id="role-admin">
-                        <h3>Hospital Admin</h3>
-                        <p>The hospital owner/ops view. Manage seats, services, and jump into clinical roles.</p>
-                        <ul class="role-panel__list">
-                            <li>Admin | Doctor | Frontdesk switcher</li>
-                            <li>Masters (Single price list)</li>
-                            <li>Data hub (Import CSV/Excel)</li>
-                        </ul>
-                    </div>
-                    <div class="role-panel inner-3d" id="role-super">
-                        <h3>Platform Super Admin</h3>
-                        <p>Manages subscriptions and plans across the SaaS. Never sees PHI without an audited session.</p>
-                        <ul class="role-panel__list">
-                            <li>MRR, Plan Mix, Collections</li>
-                            <li>Tenant & Seat cap management</li>
-                            <li>Audited impersonation sessions</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ PRICING 3D ============ -->
-        <section id="pricing" class="perspective-container">
-            <div class="section-head is-centered scroll-reveal-3d">
-                <h2 class="inner-stagger">Start free. Upgrade when you need more.</h2>
-            </div>
-            <div class="plan-grid">
-                <div class="plan card-3d scroll-reveal-3d">
-                    <h3 class="inner-3d inner-stagger">Free</h3>
-                    <p class="plan__desc inner-3d inner-stagger">For a single clinic finding its feet.</p>
-                    <ul class="plan__list inner-3d inner-stagger">
-                        <li>Front desk & doctor logins</li>
-                        <li>OPD queue & Visit Pad</li>
-                    </ul>
-                    <a href="#" class="btn btn--outline inner-3d inner-stagger">Start Free</a>
-                </div>
-                <div class="plan plan--highlight card-3d scroll-reveal-3d">
-                    <div class="plan__badge inner-3d">Most Popular</div>
-                    <h3 class="inner-3d inner-stagger">Growth</h3>
-                    <p class="plan__desc inner-3d inner-stagger">For a hospital running OPD and IPD.</p>
-                    <ul class="plan__list inner-3d inner-stagger">
-                        <li>Inpatient admissions & beds</li>
-                        <li>WhatsApp notifications</li>
-                    </ul>
-                    <a href="#" class="btn btn--primary inner-3d inner-stagger">Upgrade to Growth</a>
-                </div>
-                <div class="plan card-3d scroll-reveal-3d">
-                    <h3 class="inner-3d inner-stagger">Enterprise</h3>
-                    <p class="plan__desc inner-3d inner-stagger">For diagnostic chains.</p>
-                    <ul class="plan__list inner-3d inner-stagger">
-                        <li>Multi-branch support</li>
-                        <li>ABDM/ABHA integration</li>
-                    </ul>
-                    <a href="#" class="btn btn--outline inner-3d inner-stagger">Talk to us</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ CTA ============ -->
-        <section class="perspective-container">
-            <div class="cta card-3d scroll-reveal-3d">
-                <div class="cta__inner inner-3d">
-                    <h2 class="inner-stagger">Bring registration, consults, billing and beds under one login.</h2>
-                    <p class="inner-stagger">Set up your hospital's free workspace in a few minutes — no card required.</p>
-                    <div class="cta__actions inner-stagger">
-                        <a href="#" class="btn btn--primary btn--lg">Create free hospital</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-        <div class="footer__inner">
-            <div class="footer__brand">
-                <a href="#top" class="brand brand--footer">Medicus</a>
-                <p>Practice and hospital management for teams who run one patient record, not five.</p>
-            </div>
-            <div class="footer__col">
-                <h4>Platform</h4>
-                <a href="#chains">OPD / IPD Chains</a>
-                <a href="#roles">Role Workspaces</a>
-                <a href="#pricing">Pricing</a>
-            </div>
-            <div class="footer__col">
-                <h4>System</h4>
-                <a href="#">Super Admin Specs</a>
-                <a href="#">Technical Docs</a>
-            </div>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero card-3d-reveal">
+      <div class="hero-content">
+        <span class="eyebrow">MULTI-TENANT HOSPITAL OS</span>
+        <h1>Run your entire clinic on a <span class="text-teal">single unified platform</span>.</h1>
+        <p>Replace fragmented tools with one cohesive operating system designed for OPD, IPD, and diagnostic workflows. Built for scale.</p>
+        <div class="hero-ctas">
+          <a href="contact.html" class="btn btn-primary">Book a demo</a>
+          <a href="pricing.html" class="btn btn-secondary">Create workspace &rarr;</a>
         </div>
-        <div class="footer__bottom">
-            <span>© 2026 Medicus. All rights reserved.</span>
-            <span>Built for hospitals, polyclinics, and diagnostic centres.</span>
+        <p class="trust-microcopy">No credit card required. Setup in 15 minutes.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="ui-mockup card-3d">
+          <div class="ui-chrome">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <div class="ui-url">app.medicus.com/visit-pad</div>
+          </div>
+          <div class="ui-body">
+            <div class="ui-sidebar">
+              <div class="ui-nav-item active"></div>
+              <div class="ui-nav-item"></div>
+              <div class="ui-nav-item"></div>
+            </div>
+            <div class="ui-main">
+              <div class="ui-header">
+                <div class="ui-avatar">DR</div>
+                <div class="ui-title">Dr. Sharma's Visit Pad</div>
+                <span class="chip booked" id="hero-queue-chip" style="margin-left: auto;">Booked</span>
+              </div>
+              <div class="ui-content-grid">
+                <!-- Realistic fake data instead of skeleton lines -->
+                <div class="ui-card data-card hero-row" data-placeholder="true">
+                  <div class="card-header">
+                    <strong>Anita Desai</strong> <span class="text-muted">| F, 42 yrs</span>
+                  </div>
+                  <div class="card-body">
+                    <span class="text-muted">10:30 AM • OPD Orthopedics</span>
+                    <p>C/O: Severe lower back pain radiating to left leg.</p>
+                  </div>
+                </div>
+                <div class="ui-card data-card hero-row" data-placeholder="true">
+                  <div class="card-header">
+                    <strong>Rahul Verma</strong> <span class="text-muted">| M, 28 yrs</span>
+                  </div>
+                  <div class="card-body">
+                    <span class="text-muted">10:45 AM • Follow-up</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Social Proof Marquee -->
+    <section class="social-proof fade-slide-up bg-light">
+      <div class="proof-header">
+        <div class="rating-badges" data-placeholder="true">
+          <!-- Placeholder badges for G2/Capterra -->
+          <span class="stars">★★★★★</span>
+          <span>4.9/5 on Capterra &amp; G2</span>
+        </div>
+        <!-- [PLACEHOLDER: update actual clinic count] -->
+        <p class="proof-stat" data-placeholder="true">Trusted by 500+ clinics across India</p>
+      </div>
+      <div class="marquee-wrapper">
+        <div class="marquee-content">
+          <!-- [PLACEHOLDER: real client logos] -->
+          <div class="placeholder-logo" data-placeholder="true">City Hospital</div>
+          <div class="placeholder-logo" data-placeholder="true">Apex Polyclinic</div>
+          <div class="placeholder-logo" data-placeholder="true">Prime Diagnostics</div>
+          <div class="placeholder-logo" data-placeholder="true">CareHub India</div>
+          <div class="placeholder-logo" data-placeholder="true">Nova Clinics</div>
+          <!-- Duplicate for seamless scroll -->
+          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">City Hospital</div>
+          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">Apex Polyclinic</div>
+          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">Prime Diagnostics</div>
+          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">CareHub India</div>
+          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">Nova Clinics</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem Framing -->
+    <section id="how-it-works" class="problem-framing fade-slide-up">
+      <div class="section-header">
+        <h2>Running a clinic shouldn't feel this hard.</h2>
+        <p>The cost of fragmented systems is paid by your patients and staff.</p>
+      </div>
+      <div class="comparison-grid">
+        <div class="compare-card old-way">
+          <h3>The old way</h3>
+          <ul class="cross-list stagger-list">
+            <li>
+              <strong>Manual register books</strong>
+              <p>Illegible handwriting and lost patient histories.</p>
+            </li>
+            <li>
+              <strong>Fragmented WhatsApp tools</strong>
+              <p>Manual copy-pasting for reminders.</p>
+            </li>
+            <li>
+              <strong>Disconnected ledgers</strong>
+              <p>Billing mismatches between OPD and Lab.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="compare-card new-way">
+          <h3>The Medicus way</h3>
+          <ul class="check-list stagger-list">
+            <li>
+              <strong>Digital queue board</strong>
+              <p>Real-time sync from front desk to doctor.</p>
+            </li>
+            <li>
+              <strong>Native automated comms</strong>
+              <p>Receipts &amp; reminders sent automatically.</p>
+            </li>
+            <li>
+              <strong>Integrated unified billing</strong>
+              <p>No revenue leaks between departments.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Product Tour Tab Carousel -->
+    <section id="tour" class="product-tour fade-slide-up bg-light">
+      <div class="section-header">
+        <h2>Everything you need, in one window.</h2>
+        <p>A completely integrated suite for clinical and administrative teams.</p>
+      </div>
+      <div class="tour-container">
+        <div class="tour-tabs" role="tablist" aria-label="Product Tour">
+          <button class="tour-tab active" role="tab" aria-selected="true" data-target="tour-opd">OPD Visit Pad</button>
+          <button class="tour-tab" role="tab" aria-selected="false" data-target="tour-billing">Smart Billing</button>
+          <button class="tour-tab" role="tab" aria-selected="false" data-target="tour-ipd">IPD Management</button>
+          <button class="tour-tab" role="tab" aria-selected="false" data-target="tour-whatsapp">WhatsApp Native</button>
+        </div>
+        <div class="tour-panel-container">
+          
+          <!-- TAB 1: OPD Visit Pad -->
+          <div class="tour-panel active" id="tour-opd" role="tabpanel">
+            <div class="ui-mockup card-3d">
+              <div class="ui-chrome">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <div class="ui-url">app.medicus.com/visit-pad</div>
+              </div>
+              <div class="ui-body" style="height: 380px;">
+                <div class="ui-sidebar">
+                  <div class="ui-nav-item active"></div><div class="ui-nav-item"></div><div class="ui-nav-item"></div>
+                </div>
+                <div class="ui-main">
+                  <div class="ui-header">
+                    <div class="ui-avatar">DR</div>
+                    <div class="ui-title">OPD Consultation</div>
+                    <span class="chip ongoing" style="margin-left:auto;">In Progress</span>
+                  </div>
+                  <div class="ui-card data-card" style="margin-bottom: 1rem;">
+                    <strong>Patient:</strong> Rahul Verma <span class="text-muted">| M, 28 yrs</span> <br>
+                    <span class="text-muted" style="display:inline-block; margin-top:4px;"><strong>Vitals:</strong> BP 120/80, Temp 98.6°F, Wt 72kg</span>
+                  </div>
+                  <div class="ui-card data-card">
+                    <strong>Rx Builder (Prescriptions)</strong>
+                    <div class="ui-row mt-1" style="padding-top:8px; border-top:1px solid var(--border-light);">1. Azithromycin 500mg <span class="text-muted ml-auto">1-0-0 (5 Days)</span></div>
+                    <div class="ui-row mt-1">2. Paracetamol 650mg <span class="text-muted ml-auto">1-0-1 (3 Days)</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: Smart Billing -->
+          <div class="tour-panel" id="tour-billing" role="tabpanel">
+            <div class="ui-mockup card-3d">
+              <div class="ui-chrome">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <div class="ui-url">app.medicus.com/billing</div>
+              </div>
+              <div class="ui-body" style="height: 380px;">
+                <div class="ui-sidebar">
+                  <div class="ui-nav-item"></div><div class="ui-nav-item active"></div><div class="ui-nav-item"></div>
+                </div>
+                <div class="ui-main">
+                  <div class="ui-header">
+                    <div class="ui-avatar bg-teal">FD</div>
+                    <div class="ui-title">Invoice #INV-2026-091</div>
+                    <span class="chip arrived" style="margin-left:auto;">Paid via UPI</span>
+                  </div>
+                  <div class="ui-card data-card">
+                    <div class="ui-row text-muted" style="margin-bottom: 8px;"><strong>Item Description</strong> <strong class="ml-auto">Amount</strong></div>
+                    <div class="ui-row" style="margin-bottom: 6px;">Consultation - Dr. Sharma <span class="ml-auto">₹ 500.00</span></div>
+                    <div class="ui-row" style="margin-bottom: 6px;">Complete Blood Count (CBC) <span class="ml-auto">₹ 450.00</span></div>
+                    <div class="ui-row" style="margin-bottom: 6px;">Digital X-Ray (Lower Back) <span class="ml-auto">₹ 600.00</span></div>
+                    <hr style="border:0; border-top:1px dashed #E5E7EB; margin: 12px 0;">
+                    <div class="ui-row"><strong>Total Amount</strong> <strong class="ml-auto text-teal" style="font-size:1.1rem;">₹ 1,550.00</strong></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: IPD Management -->
+          <div class="tour-panel" id="tour-ipd" role="tabpanel">
+            <div class="ui-mockup card-3d">
+              <div class="ui-chrome">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <div class="ui-url">app.medicus.com/ipd-ward</div>
+              </div>
+              <div class="ui-body" style="height: 380px;">
+                <div class="ui-sidebar">
+                  <div class="ui-nav-item"></div><div class="ui-nav-item"></div><div class="ui-nav-item active"></div>
+                </div>
+                <div class="ui-main">
+                  <div class="ui-header">
+                    <div class="ui-title">Ward A (General)</div>
+                    <span class="text-muted" style="margin-left:auto; font-size:0.875rem;"><strong>8/10</strong> Beds Occupied</span>
+                  </div>
+                  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                    <div class="ui-card data-card" style="border-left: 4px solid var(--status-booked);">
+                      <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><strong>Bed A-01</strong> <span class="chip booked">Occupied</span></div>
+                      Anita Desai <br><span class="text-muted">Admitted: 2 days ago</span>
+                    </div>
+                    <div class="ui-card data-card" style="border-left: 4px solid var(--status-arrived);">
+                      <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><strong>Bed A-02</strong> <span class="chip arrived">Available</span></div>
+                      <span class="text-muted"><br>Cleaned and ready</span>
+                    </div>
+                    <div class="ui-card data-card" style="border-left: 4px solid var(--status-booked);">
+                      <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><strong>Bed A-03</strong> <span class="chip booked">Occupied</span></div>
+                      Sunil K. <br><span class="text-muted">Admitted: Today (11:00 AM)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: WhatsApp Native -->
+          <div class="tour-panel" id="tour-whatsapp" role="tabpanel">
+            <div class="ui-mockup card-3d">
+              <div class="ui-chrome">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <div class="ui-url">app.medicus.com/communications</div>
+              </div>
+              <div class="ui-body" style="height: 380px;">
+                <div class="ui-sidebar">
+                  <div class="ui-nav-item active"></div><div class="ui-nav-item active"></div><div class="ui-nav-item"></div>
+                </div>
+                <div class="ui-main">
+                  <div class="ui-header">
+                    <div class="ui-title">Automated Dispatches</div>
+                    <span class="chip arrived" style="margin-left:auto;">API Active</span>
+                  </div>
+                  <div class="ui-card data-card" style="margin-bottom: 0.75rem;">
+                    <div class="ui-row">
+                      <strong style="color:#25D366;">[WhatsApp]</strong> &nbsp; +91 98765 *****
+                      <span class="text-muted ml-auto">Just now</span>
+                    </div>
+                    <p style="margin-top:6px; color:var(--text-dark);">"Hello Rahul, your appointment with Dr. Sharma is confirmed for tomorrow..."</p>
+                    <span class="text-muted" style="font-size:0.7rem;">✓✓ Delivered</span>
+                  </div>
+                  <div class="ui-card data-card">
+                    <div class="ui-row">
+                      <strong style="color:#25D366;">[WhatsApp]</strong> &nbsp; +91 91234 *****
+                      <span class="text-muted ml-auto">10 mins ago</span>
+                    </div>
+                    <p style="margin-top:6px; color:var(--text-dark);">"Dear Anita, please find your attached payment receipt for Invoice #INV-2026-091..."</p>
+                    <span class="text-teal" style="font-size:0.7rem;">✓✓ Read</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Clinical Chains Diagram -->
+    <section class="clinical-chains card-3d-reveal">
+      <div class="section-header">
+        <h2>Two clinical chains, one patient record.</h2>
+      </div>
+      <div class="diagram-container card-3d">
+        <div class="flow opd-flow">
+          <div class="traveling-dot" aria-hidden="true"></div>
+          <div class="node">
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Front Desk<br><small>Registration &amp; Queue</small>
+          </div>
+          <div class="arrow" aria-hidden="true">&rarr;</div>
+          <div class="node accent">
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Doctor<br><small>Prescription is the record</small>
+          </div>
+          <div class="arrow" aria-hidden="true">&rarr;</div>
+          <div class="node">
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Lab / Billing<br><small>Auto-synced orders</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Role-Based Solutions -->
+    <section id="roles" class="solutions bg-light">
+      <div class="scroll-rail" aria-hidden="true">
+        <div class="rail-track"></div>
+        <div class="rail-dot" data-target="0"></div>
+        <div class="rail-dot" data-target="1"></div>
+        <div class="rail-dot" data-target="2"></div>
+        <div class="rail-dot" data-target="3"></div>
+      </div>
+
+      <div class="section-header fade-slide-up">
+        <h2>Built for every role in your facility</h2>
+      </div>
+      
+      <!-- Blocks mapped to real UI data density -->
+      <div class="solution-block fade-slide-up">
+        <div class="solution-text">
+          <span class="persona-label">FRONT DESK & OPERATIONS</span>
+          <h3>Control the patient flow from entry to exit.</h3>
+          <ul class="feature-checklist">
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Complete OPD & IPD patient registration</li>
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Live queue board management</li>
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Integrated billing and payment tracking</li>
+          </ul>
+          <a href="features.html#front-desk" class="text-link">Explore Front Desk &rarr;</a>
+        </div>
+        <div class="solution-visual">
+          <div class="ui-mockup mini data-mock">
+            <div class="ui-header-mini">Queue Board - Dr. Sharma</div>
+            <div class="ui-row"><span class="chip booked">Booked</span> Raj Patel <span class="text-muted ml-auto">10:30a</span></div>
+            <div class="ui-row"><span class="chip arrived">Arrived</span> Anita Desai <span class="text-muted ml-auto">10:45a</span></div>
+            <div class="ui-row"><span class="chip ongoing">In-visit</span> Sunil K. <span class="text-muted ml-auto">11:00a</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-block reverse fade-slide-up">
+        <div class="solution-text">
+          <span class="persona-label">CLINICAL TEAM</span>
+          <h3>Focus on care, not clerical data entry.</h3>
+          <ul class="feature-checklist">
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Streamlined Visit Pad for quick prescribing</li>
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Direct lab and radiology ordering</li>
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> IPD bedside visit logging</li>
+          </ul>
+          <a href="features.html#doctor" class="text-link">Explore Visit Pad &rarr;</a>
+        </div>
+        <div class="solution-visual">
+          <div class="ui-mockup mini data-mock">
+             <div class="ui-header-mini">Rx Builder: Anita Desai</div>
+             <div class="ui-row typing-row"><strong>Rx:</strong> Paracetamol 500mg (1-0-1)</div>
+             <div class="ui-row"><strong>Lab:</strong> Complete Blood Count (CBC)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-block fade-slide-up">
+        <div class="solution-text">
+          <span class="persona-label">HOSPITAL ADMINISTRATORS</span>
+          <h3>Secure oversight of your entire operation.</h3>
+          <ul class="feature-checklist">
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Granular staff and seat management</li>
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Pricing and master data hub</li>
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Global facility settings</li>
+          </ul>
+        </div>
+        <div class="solution-visual">
+          <div class="ui-mockup mini data-mock">
+            <div class="ui-header-mini">Staff Directory</div>
+            <div class="ui-row">
+              <div class="avatar-sm">DR</div>
+              <div><strong>Dr. Sharma</strong><br><span class="text-muted">Orthopedics • Active</span></div>
+            </div>
+            <div class="ui-row">
+              <div class="avatar-sm bg-teal">AK</div>
+              <div><strong>A. Kumar</strong><br><span class="text-muted">Front Desk • Active</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-block reverse fade-slide-up">
+        <div class="solution-text">
+          <span class="persona-label">PLATFORM OPERATORS</span>
+          <h3>Scale multi-tenant architectures effortlessly.</h3>
+          <ul class="feature-checklist">
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Manage multiple tenants and billing plans</li>
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Secure audited impersonation for support</li>
+            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> MRR and global usage dashboards</li>
+          </ul>
+        </div>
+        <div class="solution-visual">
+          <div class="ui-mockup mini dark data-mock">
+            <div class="ui-header-mini">Super Admin Console</div>
+            <div class="ui-row">Active Tenants: <strong class="ml-auto">42</strong></div>
+            <div class="ui-row">Monthly MRR: <strong class="ml-auto">₹1.2L</strong></div>
+            <div class="ui-row text-teal mt-1">Impersonate Tenant User &rarr;</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Outcomes / ROI Block -->
+    <section class="roi-stats fade-slide-up">
+      <div class="section-header">
+        <h2>It pays for itself fast.</h2>
+        <p>Beta metrics illustrating the impact of a unified system.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card" data-placeholder="true">
+          <span class="stat-badge">Projected</span>
+          <h3>40%</h3>
+          <p>Faster patient check-in times using integrated queues.</p>
+        </div>
+        <div class="stat-card" data-placeholder="true">
+          <span class="stat-badge">Projected</span>
+          <h3>0</h3>
+          <p>Double-booked appointments across departments.</p>
+        </div>
+        <div class="stat-card" data-placeholder="true">
+          <span class="stat-badge">Projected</span>
+          <h3>100%</h3>
+          <p>Digital prescription adoption leading to zero lost records.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Localization / Credibility -->
+    <section class="credibility fade-slide-up bg-light">
+      <div class="section-header">
+        <h2>Built for how Indian clinics actually run</h2>
+      </div>
+      <div class="credibility-grid">
+        <div class="cred-card">
+          <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <h4>Localized Formats</h4>
+          <p>Native DD/MM/YYYY date formatting and strict 10-digit Indian mobile number validation built-in.</p>
+        </div>
+        <div class="cred-card">
+          <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <h4>WhatsApp Native</h4>
+          <p>Send automated billing receipts and appointment reminders directly to the patient's WhatsApp.</p>
+        </div>
+        <div class="cred-card">
+          <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M2 12h20M12 2v20"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path></svg>
+          <h4>Offline-Tolerant</h4>
+          <p>Critical doctor and administrative workflows remain robust even during intermittent internet drops.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security & Compliance -->
+    <section class="security-strip fade-slide-up">
+      <div class="sec-item">
+        <div class="sec-icon"><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+        <div class="sec-content">
+          <strong>Tenant Isolation</strong>
+          <p>Every hospital's data is logically partitioned and never shared.</p>
+        </div>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon"><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+        <div class="sec-content">
+          <strong>Guarded RBAC</strong>
+          <p>Strict route enforcement based on user roles (Admin/Doctor/Front Desk).</p>
+        </div>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon"><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
+        <div class="sec-content">
+          <strong>Audited Impersonation</strong>
+          <p>Support access is tightly controlled, logged, and compliant.</p>
+        </div>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon"><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+        <div class="sec-content">
+          <strong>ABDM / ABHA Ready</strong>
+          <p>Built on modern standards to integrate with India's digital health ecosystem.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Testimonial/Quotes -->
+    <section class="testimonials fade-slide-up bg-light">
+      <div class="section-header">
+        <h2>What clinic owners are saying</h2>
+      </div>
+      <div class="testimonial-grid">
+        <!-- [PLACEHOLDER: real testimonial data] -->
+        <article class="testimonial-card" data-placeholder="true">
+          <div class="quote-icon">"</div>
+          <p class="quote-text">Switching to Medicus eliminated our billing mismatches overnight. The integrated queue board saves our front desk hours every day.</p>
+          <div class="quote-author">
+            <div class="avatar-sm">RV</div>
+            <div>
+              <strong>Dr. Rahul Verma</strong><br>
+              <span class="text-muted">Chief Medical Officer, Apex Clinics</span>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial-card" data-placeholder="true">
+          <div class="quote-icon">"</div>
+          <p class="quote-text">The Visit Pad is actually designed for doctors. It's fast, doesn't require clicking through five screens, and handles lab orders instantly.</p>
+          <div class="quote-author">
+            <div class="avatar-sm bg-teal">SM</div>
+            <div>
+              <strong>Dr. S. Mukherjee</strong><br>
+              <span class="text-muted">Consulting Physician</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Pricing Teaser -->
+    <section class="pricing-teaser fade-slide-up">
+      <div class="section-header">
+        <h2>Transparent pricing for every stage</h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="plan-card">
+          <h3>Free</h3>
+          <p class="plan-diff">Core OPD workflows for solo practices.</p>
+          <ul class="plan-features">
+            <li>Up to 3 standard users</li>
+            <li>Basic OPD Visit Pad</li>
+            <li>Queue management</li>
+          </ul>
+        </div>
+        <div class="plan-card popular">
+          <h3>Growth</h3>
+          <p class="plan-diff">IPD features and expanded team seats.</p>
+          <ul class="plan-features">
+            <li>Unlimited standard users</li>
+            <li>IPD Bed Management</li>
+            <li>Advanced Billing &amp; WhatsApp</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <h3>Enterprise</h3>
+          <p class="plan-diff">Multi-tenant management and API access.</p>
+          <ul class="plan-features">
+            <li>Tenant orchestration</li>
+            <li>Custom deployment</li>
+            <li>Priority 24/7 support</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-link-wrap">
+        <a href="pricing.html" class="text-link">See full comparison &rarr;</a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section fade-slide-up bg-light">
+      <div class="section-header">
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-accordion">
+        <details class="faq-details">
+          <summary>What are the seat limits on the Free plan?</summary>
+          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
+            <p>The Free plan includes access for up to 3 standard users (e.g., 1 Doctor, 2 Front Desk). You can upgrade to Growth at any time to add more seats.</p>
+          </div></div></div>
+        </details>
+        <details class="faq-details">
+          <summary>Are IPD features locked to specific tiers?</summary>
+          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
+            <p>Yes, In-Patient Department (IPD) workflows, including bedside visits and admission tracking, are available starting on the Growth plan.</p>
+          </div></div></div>
+        </details>
+        <details class="faq-details">
+          <summary>Does Medicus work offline?</summary>
+          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
+            <p>Medicus is offline-tolerant. While it requires an internet connection for real-time queue syncing, active Visit Pad sessions safely cache data if the connection drops momentarily.</p>
+          </div></div></div>
+        </details>
+        <details class="faq-details">
+          <summary>Can I manage multiple clinic locations?</summary>
+          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
+            <p>Yes, the Enterprise tier supports multi-tenant orchestration, allowing you to manage permissions, billing, and reporting across multiple independent clinics from one Super Admin console.</p>
+          </div></div></div>
+        </details>
+        <details class="faq-details">
+          <summary>Is our patient data secure and isolated?</summary>
+          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
+            <p>Absolutely. Medicus relies on strict logical tenant isolation at the database level, ensuring one hospital's data can never be queried or accessed by another account.</p>
+          </div></div></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta card-3d-reveal">
+      <div class="cta-container card-3d">
+        <h2>Ready to unify your clinic?</h2>
+        <p>Join the hospitals operating faster and safer on Medicus.</p>
+        <div class="cta-buttons">
+          <a href="pricing.html" class="btn btn-primary">Start free trial</a>
+          <a href="contact.html" class="btn btn-ghost">Talk to sales</a>
+        </div>
+        <p class="trust-microcopy">Secure, compliant, and built for India.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col brand-col">
+        <a href="/" class="brand-logo" aria-label="Medicus Home">
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Medicus</span>
+        </a>
+        <p>The OS for Indian Healthcare.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html#front-desk">Front Desk</a></li>
+          <li><a href="features.html#doctor">Visit Pad</a></li>
+          <li><a href="features.html#admin">Admin Hub</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="contact.html">Contact Sales</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Medicus. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
