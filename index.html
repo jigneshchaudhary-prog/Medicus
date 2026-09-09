@@ -1,758 +1,445 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medicus | Multi-Tenant Hospital & Clinic OS</title>
-  <meta name="description" content="Run your entire hospital, polyclinic, or diagnostic center on a single unified platform. Designed for how Indian healthcare actually works.">
-  <meta name="robots" content="index, follow">
-  
-  <!-- [PLACEHOLDER: canonical url] -->
-  <link rel="canonical" href="https://medicus.com/">
-  <!-- [PLACEHOLDER: favicon set] -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicus | Premium Hospital Management</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://medicus.com/">
-  <meta property="og:title" content="Medicus | Multi-Tenant Hospital OS">
-  <meta property="og:description" content="Run your entire hospital, polyclinic, or diagnostic center on a single unified platform.">
-  <!-- [PLACEHOLDER: real OG image path] -->
-  <meta property="og:image" content="https://medicus.com/assets/og-image.jpg">
-  <meta property="twitter:card" content="summary_large_image">
+    <style>
+        /* --- Hero Enhancements --- */
+        html { scroll-behavior: smooth; }
+        .home-hero { height: 95vh; min-height: 700px; background: url('https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=2000&q=80') center/cover no-repeat; display: flex; align-items: center; position: relative; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(11, 42, 110, 0.98) 0%, rgba(11, 42, 110, 0.6) 100%); }
+        .hero-content { position: relative; z-index: 10; max-width: 850px; color: var(--white); animation: fadeUp 0.8s ease-out; }
+        
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-  <!-- Fonts (Preconnected & swapped) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;500;600&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="style.css">
+        .hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 24px; background: linear-gradient(to right, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* --- Live Ticker --- */
+        .ticker { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(7, 27, 69, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 25px 0; border-top: 1px solid rgba(255,255,255,0.15); z-index: 20; }
+        .ticker-grid { display: flex; justify-content: space-around; align-items: center; color: var(--white); }
+        .t-item { display: flex; align-items: center; gap: 16px; }
+        .t-item i { font-size: 2.2rem; color: var(--teal); }
+        .t-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
+        .t-val { font-size: 2rem; font-family: 'Outfit', sans-serif; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--white); }
+        .pulse { width: 12px; height: 12px; background: #10b981; border-radius: 50%; box-shadow: 0 0 12px #10b981; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-  <!-- JSON-LD Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Medicus",
-    "applicationCategory": "HealthApplication",
-    "operatingSystem": "WebBrowser",
-    "description": "Multi-tenant Hospital & Clinic OS for the Indian healthcare market.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "INR"
-    }
-  }
-  </script>
+        /* --- Roles / Workspaces --- */
+        .roles-section { background: var(--bg-gray); padding: 100px 0; }
+        .role-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 50px; }
+        .r-card-img { position: relative; height: 380px; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); transition: 0.3s; cursor: pointer; }
+        .r-card-img:hover { transform: translateY(-10px); }
+        .r-card-img img { position: absolute; inset: 0; z-index: 1; transition: transform 0.5s; }
+        .r-card-img:hover img { transform: scale(1.05); }
+        .r-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--navy) 5%, transparent 80%); z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; color: var(--white); }
+        .r-card-overlay i { font-size: 2.5rem; color: var(--teal); margin-bottom: 15px; }
+        .r-card-overlay h3 { color: var(--white); font-size: 1.6rem; margin-bottom: 5px; }
+        .r-route { font-family: monospace; color: var(--teal-light); font-size: 0.85rem; font-weight: 600; }
+
+        /* --- Modules (Interactive Stepper) --- */
+        .stepper-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; margin-top: 50px; }
+        .step-list { display: flex; flex-direction: column; gap: 20px; }
+        .step-btn { text-align: left; padding: 25px; border-radius: 12px; background: var(--white); border: 2px solid var(--border); cursor: pointer; transition: 0.3s; }
+        .step-btn:hover { border-color: var(--teal-light); }
+        .step-btn.active { border-color: var(--teal); box-shadow: var(--shadow-md); transform: translateX(10px); }
+        .step-btn h4 { font-size: 1.3rem; margin-bottom: 5px; display: flex; align-items: center; gap: 15px; color: var(--navy); }
+        .step-btn h4 i { color: var(--text-muted); font-size: 1.5rem; transition: 0.3s; }
+        .step-btn.active h4 i { color: var(--teal); }
+        .step-btn p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
+        .step-content { position: relative; height: 500px; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); }
+        .step-panel { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
+        .step-panel.active { opacity: 1; pointer-events: all; }
+        .step-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(11,42,110,0.95) 10%, transparent); padding: 50px 30px 30px; color: var(--white); }
+        .step-overlay h3 { color: var(--white); margin-bottom: 10px; font-size: 1.8rem;}
+        .step-overlay p { margin: 0; color: #cbd5e1; }
+
+        /* --- Integrations --- */
+        .int-section { background: var(--navy); color: var(--white); padding: 100px 0; }
+        .int-section .section-title { color: var(--white); }
+        .int-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px; }
+        .int-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 40px 30px; border-radius: 16px; text-align: center; transition: 0.3s; backdrop-filter: blur(10px); }
+        .int-card:hover { background: var(--teal); border-color: var(--teal); transform: translateY(-5px); }
+        .int-card i { font-size: 3rem; color: var(--teal); margin-bottom: 20px; transition: 0.3s; }
+        .int-card:hover i { color: var(--white); }
+        .int-card h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 10px; }
+        .int-card p { color: #cbd5e1; font-size: 0.95rem; margin: 0; transition: 0.3s; }
+        .int-card:hover p { color: var(--white); }
+
+        /* --- FAQs --- */
+        .faq-section { padding: 100px 0; background: var(--white); }
+        .faq-container { max-width: 800px; margin: 50px auto 0; }
+        details { background: var(--bg-gray); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; overflow: hidden; transition: 0.3s; }
+        details[open] { border-color: var(--teal); box-shadow: var(--shadow-sm); background: var(--white); }
+        summary { padding: 25px; font-size: 1.15rem; font-weight: 600; color: var(--navy); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: 'Outfit', sans-serif; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '\f067'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--teal); transition: 0.3s; }
+        details[open] summary::after { content: '\f068'; transform: rotate(180deg); }
+        .faq-content { padding: 0 25px 25px; color: var(--text-muted); line-height: 1.6; font-size: 1.05rem; }
+
+        /* --- Global Footer Overrides --- */
+        footer { background: var(--navy-dark, #071b45); color: var(--white, #ffffff); padding: 80px 0 30px; margin-top: 0; border-top: none; }
+        footer h3, footer h4, footer h5, footer .logo { color: var(--white, #ffffff) !important; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 20px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding: 40px 0; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 12px; color: #cbd5e1; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
+        .footer-col ul li a { color: #cbd5e1; text-decoration: none; transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--teal, #00B8C5); }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; color: #cbd5e1; font-size: 0.9rem; }
+
+        @media(max-width: 1024px) { 
+            .ticker-grid { flex-direction: column; gap: 20px; align-items: flex-start; } 
+            .home-hero { height: auto; padding: 120px 0 250px; }
+            .hero-content h1 { font-size: 3rem; }
+            .role-grid, .int-grid { grid-template-columns: 1fr 1fr; }
+            .stepper-container { grid-template-columns: 1fr; }
+            .step-btn.active { transform: translateY(-5px) translateX(0); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media(max-width: 768px) {
+            .role-grid, .int-grid, .footer-grid { grid-template-columns: 1fr; }
+            .footer-top { flex-direction: column; align-items: flex-start; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Announcement Bar -->
-  <div class="announcement-bar" id="announcementBar">
-    <p>Now live: WhatsApp-based OTP patient registration <a href="/features.html">Learn more &rarr;</a></p>
-    <button aria-label="Dismiss announcement" id="closeAnnouncement">&times;</button>
-  </div>
-
-  <!-- Sticky Nav -->
-  <header class="site-header" id="siteNav">
-    <div id="scroll-progress-bar"></div>
-    <div class="nav-container">
-      <a href="/" class="brand-logo" aria-label="Medicus Home">
-        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-        <span>Medicus</span>
-      </a>
-      
-      <!-- Desktop Nav -->
-      <nav class="desktop-nav" aria-label="Main Navigation">
-        <ul class="nav-links">
-          <li><a href="#how-it-works">How it works</a></li>
-          <li><a href="#tour">Tour</a></li>
-          <li><a href="#roles">Roles</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions desktop-actions">
-        <a href="/login" class="nav-login">Log in</a>
-        <a href="contact.html" class="btn btn-primary">Book a demo</a>
-      </div>
-
-      <!-- Mobile Menu Toggle -->
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-label="Toggle navigation menu">
-        <svg aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-      </button>
-    </div>
-
-    <!-- Mobile Slide-out Panel -->
-    <div class="mobile-menu-panel" id="mobileMenuPanel" aria-hidden="true">
-      <nav aria-label="Mobile Navigation">
-        <ul class="mobile-nav-links">
-          <li><a href="#how-it-works">How it works</a></li>
-          <li><a href="#tour">Tour</a></li>
-          <li><a href="#roles">Roles</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-        </ul>
-        <div class="mobile-nav-actions">
-          <a href="/login" class="btn btn-secondary">Log in</a>
-          <a href="contact.html" class="btn btn-primary">Book a demo</a>
+    <!-- 1. HEADER (Matches Medicus Navigation Structure) -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Medicus</a>
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#roles">Roles</a>
+                <a href="#modules">Modules</a>
+                <a href="#integrations">Integrations</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="#faqs">FAQs</a>
+            </nav>
+            <a href="contact.html" class="btn btn-teal">Start Free</a>
         </div>
-      </nav>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero card-3d-reveal">
-      <div class="hero-content">
-        <span class="eyebrow">MULTI-TENANT HOSPITAL OS</span>
-        <h1>Run your entire clinic on a <span class="text-teal">single unified platform</span>.</h1>
-        <p>Replace fragmented tools with one cohesive operating system designed for OPD, IPD, and diagnostic workflows. Built for scale.</p>
-        <div class="hero-ctas">
-          <a href="contact.html" class="btn btn-primary">Book a demo</a>
-          <a href="pricing.html" class="btn btn-secondary">Create workspace &rarr;</a>
-        </div>
-        <p class="trust-microcopy">No credit card required. Setup in 15 minutes.</p>
-      </div>
-      <div class="hero-visual">
-        <div class="ui-mockup card-3d">
-          <div class="ui-chrome">
-            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-            <div class="ui-url">app.medicus.com/visit-pad</div>
-          </div>
-          <div class="ui-body">
-            <div class="ui-sidebar">
-              <div class="ui-nav-item active"></div>
-              <div class="ui-nav-item"></div>
-              <div class="ui-nav-item"></div>
+    <!-- 2. HERO SECTION -->
+    <section id="home" class="home-hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <span class="tagline" style="color: var(--teal-light); border: 1px solid rgba(229, 248, 249, 0.3); background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);">Enterprise Healthcare SaaS</span>
+            <h1>Run your hospital with absolute precision.</h1>
+            <p class="subtitle" style="color: #cbd5e1; font-size: 1.25rem;">A completely isolated multi-tenant system. Every hospital runs in its own secure vault. OPD, IPD, and billing seamlessly integrated.</p>
+            <div style="display: flex; gap: 15px;">
+                <a href="contact.html" class="btn btn-teal" style="padding: 18px 40px; font-size: 1.15rem;">Deploy Platform</a>
+                <a href="#roles" class="btn btn-outline" style="border-color: var(--white); color: var(--white); padding: 18px 40px; font-size: 1.15rem;">View Workspaces</a>
             </div>
-            <div class="ui-main">
-              <div class="ui-header">
-                <div class="ui-avatar">DR</div>
-                <div class="ui-title">Dr. Sharma's Visit Pad</div>
-                <span class="chip booked" id="hero-queue-chip" style="margin-left: auto;">Booked</span>
-              </div>
-              <div class="ui-content-grid">
-                <!-- Realistic fake data instead of skeleton lines -->
-                <div class="ui-card data-card hero-row" data-placeholder="true">
-                  <div class="card-header">
-                    <strong>Anita Desai</strong> <span class="text-muted">| F, 42 yrs</span>
-                  </div>
-                  <div class="card-body">
-                    <span class="text-muted">10:30 AM • OPD Orthopedics</span>
-                    <p>C/O: Severe lower back pain radiating to left leg.</p>
-                  </div>
-                </div>
-                <div class="ui-card data-card hero-row" data-placeholder="true">
-                  <div class="card-header">
-                    <strong>Rahul Verma</strong> <span class="text-muted">| M, 28 yrs</span>
-                  </div>
-                  <div class="card-body">
-                    <span class="text-muted">10:45 AM • Follow-up</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Social Proof Marquee -->
-    <section class="social-proof fade-slide-up bg-light">
-      <div class="proof-header">
-        <div class="rating-badges" data-placeholder="true">
-          <!-- Placeholder badges for G2/Capterra -->
-          <span class="stars">★★★★★</span>
-          <span>4.9/5 on Capterra &amp; G2</span>
-        </div>
-        <!-- [PLACEHOLDER: update actual clinic count] -->
-        <p class="proof-stat" data-placeholder="true">Trusted by 500+ clinics across India</p>
-      </div>
-      <div class="marquee-wrapper">
-        <div class="marquee-content">
-          <!-- [PLACEHOLDER: real client logos] -->
-          <div class="placeholder-logo" data-placeholder="true">City Hospital</div>
-          <div class="placeholder-logo" data-placeholder="true">Apex Polyclinic</div>
-          <div class="placeholder-logo" data-placeholder="true">Prime Diagnostics</div>
-          <div class="placeholder-logo" data-placeholder="true">CareHub India</div>
-          <div class="placeholder-logo" data-placeholder="true">Nova Clinics</div>
-          <!-- Duplicate for seamless scroll -->
-          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">City Hospital</div>
-          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">Apex Polyclinic</div>
-          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">Prime Diagnostics</div>
-          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">CareHub India</div>
-          <div class="placeholder-logo" data-placeholder="true" aria-hidden="true">Nova Clinics</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Problem Framing -->
-    <section id="how-it-works" class="problem-framing fade-slide-up">
-      <div class="section-header">
-        <h2>Running a clinic shouldn't feel this hard.</h2>
-        <p>The cost of fragmented systems is paid by your patients and staff.</p>
-      </div>
-      <div class="comparison-grid">
-        <div class="compare-card old-way">
-          <h3>The old way</h3>
-          <ul class="cross-list stagger-list">
-            <li>
-              <strong>Manual register books</strong>
-              <p>Illegible handwriting and lost patient histories.</p>
-            </li>
-            <li>
-              <strong>Fragmented WhatsApp tools</strong>
-              <p>Manual copy-pasting for reminders.</p>
-            </li>
-            <li>
-              <strong>Disconnected ledgers</strong>
-              <p>Billing mismatches between OPD and Lab.</p>
-            </li>
-          </ul>
-        </div>
-        <div class="compare-card new-way">
-          <h3>The Medicus way</h3>
-          <ul class="check-list stagger-list">
-            <li>
-              <strong>Digital queue board</strong>
-              <p>Real-time sync from front desk to doctor.</p>
-            </li>
-            <li>
-              <strong>Native automated comms</strong>
-              <p>Receipts &amp; reminders sent automatically.</p>
-            </li>
-            <li>
-              <strong>Integrated unified billing</strong>
-              <p>No revenue leaks between departments.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEW: Product Tour Tab Carousel -->
-    <section id="tour" class="product-tour fade-slide-up bg-light">
-      <div class="section-header">
-        <h2>Everything you need, in one window.</h2>
-        <p>A completely integrated suite for clinical and administrative teams.</p>
-      </div>
-      <div class="tour-container">
-        <div class="tour-tabs" role="tablist" aria-label="Product Tour">
-          <button class="tour-tab active" role="tab" aria-selected="true" data-target="tour-opd">OPD Visit Pad</button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-target="tour-billing">Smart Billing</button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-target="tour-ipd">IPD Management</button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-target="tour-whatsapp">WhatsApp Native</button>
-        </div>
-        <div class="tour-panel-container">
-          
-          <!-- TAB 1: OPD Visit Pad -->
-          <div class="tour-panel active" id="tour-opd" role="tabpanel">
-            <div class="ui-mockup card-3d">
-              <div class="ui-chrome">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <div class="ui-url">app.medicus.com/visit-pad</div>
-              </div>
-              <div class="ui-body" style="height: 380px;">
-                <div class="ui-sidebar">
-                  <div class="ui-nav-item active"></div><div class="ui-nav-item"></div><div class="ui-nav-item"></div>
-                </div>
-                <div class="ui-main">
-                  <div class="ui-header">
-                    <div class="ui-avatar">DR</div>
-                    <div class="ui-title">OPD Consultation</div>
-                    <span class="chip ongoing" style="margin-left:auto;">In Progress</span>
-                  </div>
-                  <div class="ui-card data-card" style="margin-bottom: 1rem;">
-                    <strong>Patient:</strong> Rahul Verma <span class="text-muted">| M, 28 yrs</span> <br>
-                    <span class="text-muted" style="display:inline-block; margin-top:4px;"><strong>Vitals:</strong> BP 120/80, Temp 98.6°F, Wt 72kg</span>
-                  </div>
-                  <div class="ui-card data-card">
-                    <strong>Rx Builder (Prescriptions)</strong>
-                    <div class="ui-row mt-1" style="padding-top:8px; border-top:1px solid var(--border-light);">1. Azithromycin 500mg <span class="text-muted ml-auto">1-0-0 (5 Days)</span></div>
-                    <div class="ui-row mt-1">2. Paracetamol 650mg <span class="text-muted ml-auto">1-0-1 (3 Days)</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- TAB 2: Smart Billing -->
-          <div class="tour-panel" id="tour-billing" role="tabpanel">
-            <div class="ui-mockup card-3d">
-              <div class="ui-chrome">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <div class="ui-url">app.medicus.com/billing</div>
-              </div>
-              <div class="ui-body" style="height: 380px;">
-                <div class="ui-sidebar">
-                  <div class="ui-nav-item"></div><div class="ui-nav-item active"></div><div class="ui-nav-item"></div>
-                </div>
-                <div class="ui-main">
-                  <div class="ui-header">
-                    <div class="ui-avatar bg-teal">FD</div>
-                    <div class="ui-title">Invoice #INV-2026-091</div>
-                    <span class="chip arrived" style="margin-left:auto;">Paid via UPI</span>
-                  </div>
-                  <div class="ui-card data-card">
-                    <div class="ui-row text-muted" style="margin-bottom: 8px;"><strong>Item Description</strong> <strong class="ml-auto">Amount</strong></div>
-                    <div class="ui-row" style="margin-bottom: 6px;">Consultation - Dr. Sharma <span class="ml-auto">₹ 500.00</span></div>
-                    <div class="ui-row" style="margin-bottom: 6px;">Complete Blood Count (CBC) <span class="ml-auto">₹ 450.00</span></div>
-                    <div class="ui-row" style="margin-bottom: 6px;">Digital X-Ray (Lower Back) <span class="ml-auto">₹ 600.00</span></div>
-                    <hr style="border:0; border-top:1px dashed #E5E7EB; margin: 12px 0;">
-                    <div class="ui-row"><strong>Total Amount</strong> <strong class="ml-auto text-teal" style="font-size:1.1rem;">₹ 1,550.00</strong></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- TAB 3: IPD Management -->
-          <div class="tour-panel" id="tour-ipd" role="tabpanel">
-            <div class="ui-mockup card-3d">
-              <div class="ui-chrome">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <div class="ui-url">app.medicus.com/ipd-ward</div>
-              </div>
-              <div class="ui-body" style="height: 380px;">
-                <div class="ui-sidebar">
-                  <div class="ui-nav-item"></div><div class="ui-nav-item"></div><div class="ui-nav-item active"></div>
-                </div>
-                <div class="ui-main">
-                  <div class="ui-header">
-                    <div class="ui-title">Ward A (General)</div>
-                    <span class="text-muted" style="margin-left:auto; font-size:0.875rem;"><strong>8/10</strong> Beds Occupied</span>
-                  </div>
-                  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
-                    <div class="ui-card data-card" style="border-left: 4px solid var(--status-booked);">
-                      <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><strong>Bed A-01</strong> <span class="chip booked">Occupied</span></div>
-                      Anita Desai <br><span class="text-muted">Admitted: 2 days ago</span>
+        
+        <!-- Live Ticker -->
+        <div class="ticker">
+            <div class="container ticker-grid">
+                <div class="t-item">
+                    <i class="fa-solid fa-server"></i>
+                    <div>
+                        <div class="t-label">System Status</div>
+                        <div class="t-val" style="color:#10b981;"><span class="pulse"></span> Online</div>
                     </div>
-                    <div class="ui-card data-card" style="border-left: 4px solid var(--status-arrived);">
-                      <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><strong>Bed A-02</strong> <span class="chip arrived">Available</span></div>
-                      <span class="text-muted"><br>Cleaned and ready</span>
-                    </div>
-                    <div class="ui-card data-card" style="border-left: 4px solid var(--status-booked);">
-                      <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><strong>Bed A-03</strong> <span class="chip booked">Occupied</span></div>
-                      Sunil K. <br><span class="text-muted">Admitted: Today (11:00 AM)</span>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- TAB 4: WhatsApp Native -->
-          <div class="tour-panel" id="tour-whatsapp" role="tabpanel">
-            <div class="ui-mockup card-3d">
-              <div class="ui-chrome">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <div class="ui-url">app.medicus.com/communications</div>
-              </div>
-              <div class="ui-body" style="height: 380px;">
-                <div class="ui-sidebar">
-                  <div class="ui-nav-item active"></div><div class="ui-nav-item active"></div><div class="ui-nav-item"></div>
-                </div>
-                <div class="ui-main">
-                  <div class="ui-header">
-                    <div class="ui-title">Automated Dispatches</div>
-                    <span class="chip arrived" style="margin-left:auto;">API Active</span>
-                  </div>
-                  <div class="ui-card data-card" style="margin-bottom: 0.75rem;">
-                    <div class="ui-row">
-                      <strong style="color:#25D366;">[WhatsApp]</strong> &nbsp; +91 98765 *****
-                      <span class="text-muted ml-auto">Just now</span>
+                <div class="t-item">
+                    <i class="fa-solid fa-stethoscope"></i>
+                    <div>
+                        <div class="t-label">Live Consults</div>
+                        <div class="t-val" id="live-consults">842</div>
                     </div>
-                    <p style="margin-top:6px; color:var(--text-dark);">"Hello Rahul, your appointment with Dr. Sharma is confirmed for tomorrow..."</p>
-                    <span class="text-muted" style="font-size:0.7rem;">✓✓ Delivered</span>
-                  </div>
-                  <div class="ui-card data-card">
-                    <div class="ui-row">
-                      <strong style="color:#25D366;">[WhatsApp]</strong> &nbsp; +91 91234 *****
-                      <span class="text-muted ml-auto">10 mins ago</span>
-                    </div>
-                    <p style="margin-top:6px; color:var(--text-dark);">"Dear Anita, please find your attached payment receipt for Invoice #INV-2026-091..."</p>
-                    <span class="text-teal" style="font-size:0.7rem;">✓✓ Read</span>
-                  </div>
                 </div>
-              </div>
+                <div class="t-item">
+                    <i class="fa-solid fa-bed-pulse"></i>
+                    <div>
+                        <div class="t-label">IPD Occupancy</div>
+                        <div class="t-val">89%</div>
+                    </div>
+                </div>
             </div>
-          </div>
-
         </div>
-      </div>
     </section>
 
-    <!-- Clinical Chains Diagram -->
-    <section class="clinical-chains card-3d-reveal">
-      <div class="section-header">
-        <h2>Two clinical chains, one patient record.</h2>
-      </div>
-      <div class="diagram-container card-3d">
-        <div class="flow opd-flow">
-          <div class="traveling-dot" aria-hidden="true"></div>
-          <div class="node">
-            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            Front Desk<br><small>Registration &amp; Queue</small>
-          </div>
-          <div class="arrow" aria-hidden="true">&rarr;</div>
-          <div class="node accent">
-            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            Doctor<br><small>Prescription is the record</small>
-          </div>
-          <div class="arrow" aria-hidden="true">&rarr;</div>
-          <div class="node">
-            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            Lab / Billing<br><small>Auto-synced orders</small>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Role-Based Solutions -->
-    <section id="roles" class="solutions bg-light">
-      <div class="scroll-rail" aria-hidden="true">
-        <div class="rail-track"></div>
-        <div class="rail-dot" data-target="0"></div>
-        <div class="rail-dot" data-target="1"></div>
-        <div class="rail-dot" data-target="2"></div>
-        <div class="rail-dot" data-target="3"></div>
-      </div>
-
-      <div class="section-header fade-slide-up">
-        <h2>Built for every role in your facility</h2>
-      </div>
-      
-      <!-- Blocks mapped to real UI data density -->
-      <div class="solution-block fade-slide-up">
-        <div class="solution-text">
-          <span class="persona-label">FRONT DESK & OPERATIONS</span>
-          <h3>Control the patient flow from entry to exit.</h3>
-          <ul class="feature-checklist">
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Complete OPD & IPD patient registration</li>
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Live queue board management</li>
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Integrated billing and payment tracking</li>
-          </ul>
-          <a href="features.html#front-desk" class="text-link">Explore Front Desk &rarr;</a>
-        </div>
-        <div class="solution-visual">
-          <div class="ui-mockup mini data-mock">
-            <div class="ui-header-mini">Queue Board - Dr. Sharma</div>
-            <div class="ui-row"><span class="chip booked">Booked</span> Raj Patel <span class="text-muted ml-auto">10:30a</span></div>
-            <div class="ui-row"><span class="chip arrived">Arrived</span> Anita Desai <span class="text-muted ml-auto">10:45a</span></div>
-            <div class="ui-row"><span class="chip ongoing">In-visit</span> Sunil K. <span class="text-muted ml-auto">11:00a</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solution-block reverse fade-slide-up">
-        <div class="solution-text">
-          <span class="persona-label">CLINICAL TEAM</span>
-          <h3>Focus on care, not clerical data entry.</h3>
-          <ul class="feature-checklist">
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Streamlined Visit Pad for quick prescribing</li>
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Direct lab and radiology ordering</li>
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> IPD bedside visit logging</li>
-          </ul>
-          <a href="features.html#doctor" class="text-link">Explore Visit Pad &rarr;</a>
-        </div>
-        <div class="solution-visual">
-          <div class="ui-mockup mini data-mock">
-             <div class="ui-header-mini">Rx Builder: Anita Desai</div>
-             <div class="ui-row typing-row"><strong>Rx:</strong> Paracetamol 500mg (1-0-1)</div>
-             <div class="ui-row"><strong>Lab:</strong> Complete Blood Count (CBC)</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solution-block fade-slide-up">
-        <div class="solution-text">
-          <span class="persona-label">HOSPITAL ADMINISTRATORS</span>
-          <h3>Secure oversight of your entire operation.</h3>
-          <ul class="feature-checklist">
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Granular staff and seat management</li>
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Pricing and master data hub</li>
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Global facility settings</li>
-          </ul>
-        </div>
-        <div class="solution-visual">
-          <div class="ui-mockup mini data-mock">
-            <div class="ui-header-mini">Staff Directory</div>
-            <div class="ui-row">
-              <div class="avatar-sm">DR</div>
-              <div><strong>Dr. Sharma</strong><br><span class="text-muted">Orthopedics • Active</span></div>
+    <!-- 3. ROLES (Workspaces) -->
+    <section id="roles" class="section roles-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="tagline">Workspace Logic</span>
+                <h2 class="section-title">One Role. One UI.</h2>
+                <p class="section-lead" style="color: var(--text-muted);">Users only see the tools they need to perform their specific job. Middleware and backend strictly enforce route access.</p>
             </div>
-            <div class="ui-row">
-              <div class="avatar-sm bg-teal">AK</div>
-              <div><strong>A. Kumar</strong><br><span class="text-muted">Front Desk • Active</span></div>
+
+            <div class="role-grid">
+                <!-- Admin -->
+                <div class="r-card-img">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Admin">
+                    <div class="r-card-overlay">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <h3>Hospital Admin</h3>
+                        <div class="r-route">/admin</div>
+                    </div>
+                </div>
+                <!-- Doctor -->
+                <div class="r-card-img" style="border: 3px solid var(--teal); transform: scale(1.02);">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=2064&auto=format&fit=crop" alt="Doctor">
+                    <div class="r-card-overlay">
+                        <i class="fa-solid fa-user-doctor" style="color: var(--white);"></i>
+                        <h3>Doctor</h3>
+                        <div class="r-route" style="color: var(--white);">/doctor</div>
+                    </div>
+                </div>
+                <!-- Front Desk -->
+                <div class="r-card-img">
+                    <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?q=80&w=2128&auto=format&fit=crop" alt="Front Desk">
+                    <div class="r-card-overlay">
+                        <i class="fa-solid fa-desktop"></i>
+                        <h3>Front Desk</h3>
+                        <div class="r-route">/frontdesk</div>
+                    </div>
+                </div>
+                <!-- IPD & Lab -->
+                <div class="r-card-img">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop" alt="Lab and IPD">
+                    <div class="r-card-overlay">
+                        <i class="fa-solid fa-vials"></i>
+                        <h3>Lab & IPD</h3>
+                        <div class="r-route">/lab | /ipd</div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-
-      <div class="solution-block reverse fade-slide-up">
-        <div class="solution-text">
-          <span class="persona-label">PLATFORM OPERATORS</span>
-          <h3>Scale multi-tenant architectures effortlessly.</h3>
-          <ul class="feature-checklist">
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Manage multiple tenants and billing plans</li>
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> Secure audited impersonation for support</li>
-            <li><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"></polyline></svg> MRR and global usage dashboards</li>
-          </ul>
-        </div>
-        <div class="solution-visual">
-          <div class="ui-mockup mini dark data-mock">
-            <div class="ui-header-mini">Super Admin Console</div>
-            <div class="ui-row">Active Tenants: <strong class="ml-auto">42</strong></div>
-            <div class="ui-row">Monthly MRR: <strong class="ml-auto">₹1.2L</strong></div>
-            <div class="ui-row text-teal mt-1">Impersonate Tenant User &rarr;</div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- NEW: Outcomes / ROI Block -->
-    <section class="roi-stats fade-slide-up">
-      <div class="section-header">
-        <h2>It pays for itself fast.</h2>
-        <p>Beta metrics illustrating the impact of a unified system.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card" data-placeholder="true">
-          <span class="stat-badge">Projected</span>
-          <h3>40%</h3>
-          <p>Faster patient check-in times using integrated queues.</p>
-        </div>
-        <div class="stat-card" data-placeholder="true">
-          <span class="stat-badge">Projected</span>
-          <h3>0</h3>
-          <p>Double-booked appointments across departments.</p>
-        </div>
-        <div class="stat-card" data-placeholder="true">
-          <span class="stat-badge">Projected</span>
-          <h3>100%</h3>
-          <p>Digital prescription adoption leading to zero lost records.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Localization / Credibility -->
-    <section class="credibility fade-slide-up bg-light">
-      <div class="section-header">
-        <h2>Built for how Indian clinics actually run</h2>
-      </div>
-      <div class="credibility-grid">
-        <div class="cred-card">
-          <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          <h4>Localized Formats</h4>
-          <p>Native DD/MM/YYYY date formatting and strict 10-digit Indian mobile number validation built-in.</p>
-        </div>
-        <div class="cred-card">
-          <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          <h4>WhatsApp Native</h4>
-          <p>Send automated billing receipts and appointment reminders directly to the patient's WhatsApp.</p>
-        </div>
-        <div class="cred-card">
-          <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M2 12h20M12 2v20"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path></svg>
-          <h4>Offline-Tolerant</h4>
-          <p>Critical doctor and administrative workflows remain robust even during intermittent internet drops.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Security & Compliance -->
-    <section class="security-strip fade-slide-up">
-      <div class="sec-item">
-        <div class="sec-icon"><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
-        <div class="sec-content">
-          <strong>Tenant Isolation</strong>
-          <p>Every hospital's data is logically partitioned and never shared.</p>
-        </div>
-      </div>
-      <div class="sec-item">
-        <div class="sec-icon"><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-        <div class="sec-content">
-          <strong>Guarded RBAC</strong>
-          <p>Strict route enforcement based on user roles (Admin/Doctor/Front Desk).</p>
-        </div>
-      </div>
-      <div class="sec-item">
-        <div class="sec-icon"><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
-        <div class="sec-content">
-          <strong>Audited Impersonation</strong>
-          <p>Support access is tightly controlled, logged, and compliant.</p>
-        </div>
-      </div>
-      <div class="sec-item">
-        <div class="sec-icon"><svg aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
-        <div class="sec-content">
-          <strong>ABDM / ABHA Ready</strong>
-          <p>Built on modern standards to integrate with India's digital health ecosystem.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEW: Testimonial/Quotes -->
-    <section class="testimonials fade-slide-up bg-light">
-      <div class="section-header">
-        <h2>What clinic owners are saying</h2>
-      </div>
-      <div class="testimonial-grid">
-        <!-- [PLACEHOLDER: real testimonial data] -->
-        <article class="testimonial-card" data-placeholder="true">
-          <div class="quote-icon">"</div>
-          <p class="quote-text">Switching to Medicus eliminated our billing mismatches overnight. The integrated queue board saves our front desk hours every day.</p>
-          <div class="quote-author">
-            <div class="avatar-sm">RV</div>
-            <div>
-              <strong>Dr. Rahul Verma</strong><br>
-              <span class="text-muted">Chief Medical Officer, Apex Clinics</span>
+    <!-- 4. MODULES (Interactive Clinical Chains) -->
+    <section id="modules" class="section">
+        <div class="container">
+            <div class="text-center">
+                <span class="tagline">Clinical Modules</span>
+                <h2 class="section-title">How Patients Move</h2>
+                <p class="section-lead" style="margin: 0 auto;">No disconnected modules. The system naturally follows clinical realities from walk-in to discharge.</p>
             </div>
-          </div>
-        </article>
-        <article class="testimonial-card" data-placeholder="true">
-          <div class="quote-icon">"</div>
-          <p class="quote-text">The Visit Pad is actually designed for doctors. It's fast, doesn't require clicking through five screens, and handles lab orders instantly.</p>
-          <div class="quote-author">
-            <div class="avatar-sm bg-teal">SM</div>
-            <div>
-              <strong>Dr. S. Mukherjee</strong><br>
-              <span class="text-muted">Consulting Physician</span>
+
+            <div class="stepper-container">
+                <!-- Step Buttons -->
+                <div class="step-list">
+                    <div class="step-btn active">
+                        <h4><i class="fa-solid fa-desktop"></i> 1. Front Desk & Queue</h4>
+                        <p>Walk-ins or booked patients check in. Token numbers are instantly generated and the Live Queue board updates automatically.</p>
+                    </div>
+                    <div class="step-btn">
+                        <h4><i class="fa-solid fa-user-doctor"></i> 2. The Visit Pad</h4>
+                        <p>The doctor pulls the patient into the Visit Pad. Diagnoses, medicines, and lab orders are drafted and finalized on one screen.</p>
+                    </div>
+                    <div class="step-btn">
+                        <h4><i class="fa-solid fa-bed"></i> 3. IPD Admissions & Labs</h4>
+                        <p>If admitted, beds are allocated seamlessly. Lab orders move directly to the lab module for secure result tracking.</p>
+                    </div>
+                    <div class="step-btn">
+                        <h4><i class="fa-solid fa-file-invoice-dollar"></i> 4. Instant Billing</h4>
+                        <p>Appointment and visit data instantly form the invoice. Discharge is strictly blocked if any charges remain unpaid.</p>
+                    </div>
+                </div>
+
+                <!-- Step Visual Panels -->
+                <div class="step-content">
+                    <div class="step-panel active">
+                        <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&q=80" alt="Front Desk">
+                        <div class="step-overlay">
+                            <h3>Frictionless Reception</h3>
+                            <p>Register via WhatsApp OTP. Manage the live board: Booked → Arrived → On-going → Reviewed.</p>
+                        </div>
+                    </div>
+                    <div class="step-panel">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&q=80" alt="Doctor Console">
+                        <div class="step-overlay">
+                            <h3>The Visit Pad (OPD)</h3>
+                            <p>The prescription is the visit. Keep it as a draft until finalized. No manual reconciliation needed.</p>
+                        </div>
+                    </div>
+                    <div class="step-panel">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Lab and IPD">
+                        <div class="step-overlay">
+                            <h3>Bed & Lab Lifecycle</h3>
+                            <p>Track samples from order to result. Allocate beds and schedule daily bedside nursing visits.</p>
+                        </div>
+                    </div>
+                    <div class="step-panel">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&q=80" alt="Billing">
+                        <div class="step-overlay">
+                            <h3>Automated Invoicing</h3>
+                            <p>Collect cash/bank and send the PDF receipt over WhatsApp. Discount ceilings apply automatically.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </article>
-      </div>
+        </div>
     </section>
 
-    <!-- Pricing Teaser -->
-    <section class="pricing-teaser fade-slide-up">
-      <div class="section-header">
-        <h2>Transparent pricing for every stage</h2>
-      </div>
-      <div class="pricing-grid">
-        <div class="plan-card">
-          <h3>Free</h3>
-          <p class="plan-diff">Core OPD workflows for solo practices.</p>
-          <ul class="plan-features">
-            <li>Up to 3 standard users</li>
-            <li>Basic OPD Visit Pad</li>
-            <li>Queue management</li>
-          </ul>
+    <!-- 5. INTEGRATIONS -->
+    <section id="integrations" class="section int-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="tagline" style="background: rgba(255,255,255,0.2); color: var(--white); border: 1px solid var(--teal);">Built-in Connections</span>
+                <h2 class="section-title">Modern Integrations</h2>
+                <p class="section-lead" style="color: #cbd5e1;">Medicus connects seamlessly with the tools your patients already use. No extra apps required.</p>
+            </div>
+
+            <div class="int-grid">
+                <div class="int-card">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p>OTP Registrations, automated appointment reminders, and instant Rx PDF delivery.</p>
+                </div>
+                <div class="int-card">
+                    <i class="fa-solid fa-video"></i>
+                    <h3>LiveKit Video</h3>
+                    <p>Built-in high-definition video infrastructure for instant doctor-to-doctor referrals.</p>
+                </div>
+                <div class="int-card">
+                    <i class="fa-solid fa-id-card"></i>
+                    <h3>ABDM / ABHA</h3>
+                    <p>Fully compliant with India's national health interchange for seamless record sharing.</p>
+                </div>
+                <div class="int-card">
+                    <i class="fa-solid fa-wifi"></i>
+                    <h3>Offline PWA</h3>
+                    <p>The Front Desk and Doctor workflows queue locally and sync automatically if internet drops.</p>
+                </div>
+            </div>
         </div>
-        <div class="plan-card popular">
-          <h3>Growth</h3>
-          <p class="plan-diff">IPD features and expanded team seats.</p>
-          <ul class="plan-features">
-            <li>Unlimited standard users</li>
-            <li>IPD Bed Management</li>
-            <li>Advanced Billing &amp; WhatsApp</li>
-          </ul>
-        </div>
-        <div class="plan-card">
-          <h3>Enterprise</h3>
-          <p class="plan-diff">Multi-tenant management and API access.</p>
-          <ul class="plan-features">
-            <li>Tenant orchestration</li>
-            <li>Custom deployment</li>
-            <li>Priority 24/7 support</li>
-          </ul>
-        </div>
-      </div>
-      <div class="pricing-link-wrap">
-        <a href="pricing.html" class="text-link">See full comparison &rarr;</a>
-      </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="faq-section fade-slide-up bg-light">
-      <div class="section-header">
-        <h2>Frequently asked questions</h2>
-      </div>
-      <div class="faq-accordion">
-        <details class="faq-details">
-          <summary>What are the seat limits on the Free plan?</summary>
-          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
-            <p>The Free plan includes access for up to 3 standard users (e.g., 1 Doctor, 2 Front Desk). You can upgrade to Growth at any time to add more seats.</p>
-          </div></div></div>
-        </details>
-        <details class="faq-details">
-          <summary>Are IPD features locked to specific tiers?</summary>
-          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
-            <p>Yes, In-Patient Department (IPD) workflows, including bedside visits and admission tracking, are available starting on the Growth plan.</p>
-          </div></div></div>
-        </details>
-        <details class="faq-details">
-          <summary>Does Medicus work offline?</summary>
-          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
-            <p>Medicus is offline-tolerant. While it requires an internet connection for real-time queue syncing, active Visit Pad sessions safely cache data if the connection drops momentarily.</p>
-          </div></div></div>
-        </details>
-        <details class="faq-details">
-          <summary>Can I manage multiple clinic locations?</summary>
-          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
-            <p>Yes, the Enterprise tier supports multi-tenant orchestration, allowing you to manage permissions, billing, and reporting across multiple independent clinics from one Super Admin console.</p>
-          </div></div></div>
-        </details>
-        <details class="faq-details">
-          <summary>Is our patient data secure and isolated?</summary>
-          <div class="faq-content-wrapper"><div class="faq-content-inner"><div class="faq-content">
-            <p>Absolutely. Medicus relies on strict logical tenant isolation at the database level, ensuring one hospital's data can never be queried or accessed by another account.</p>
-          </div></div></div>
-        </details>
-      </div>
+    <!-- 6. FAQs -->
+    <section id="faqs" class="section faq-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="tagline">Clear Answers</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-container">
+                <details>
+                    <summary>Is our clinical data visible to the Medicus platform?</summary>
+                    <div class="faq-content">
+                        No. Medicus utilizes a strict multi-tenant architecture. All clinical data (Protected Health Information) is locked behind a strict <code>@PhiResource()</code> guard. The platform layer can only see commercial KPIs (like total subscriptions) and cannot access patient records without an audited, 60-minute impersonation token initiated by you.
+                    </div>
+                </details>
+                <details>
+                    <summary>What happens if we lose internet connection during a consult?</summary>
+                    <div class="faq-content">
+                        Medicus features an Offline PWA mode. Adding a patient, running a consult, writing a prescription, and queuing bills will continue to work locally. The system will automatically sync with the cloud the moment your connection is restored.
+                    </div>
+                </details>
+                <details>
+                    <summary>How does billing work between OPD and IPD?</summary>
+                    <div class="faq-content">
+                        For OPD, the invoice is generated directly from the finalized appointment snapshot. For IPD, the admission carries everything (bed charges, bedside visits, labs). A patient cannot be discharged in the system if unbilled charges remain on their admission record.
+                    </div>
+                </details>
+                <details>
+                    <summary>Can doctors set their own consultation fees?</summary>
+                    <div class="faq-content">
+                        No. To maintain hospital-wide consistency, all pricing is controlled by the Hospital Admin via the Centralized Masters module. This ensures discounts, taxes, and billing categories remain uniform across the entire facility.
+                    </div>
+                </details>
+                <details>
+                    <summary>Do patients need to download a separate app?</summary>
+                    <div class="faq-content">
+                        No app download is required. We utilize direct WhatsApp integration for sending OTPs, booking confirmations, and delivering Prescription/Invoice PDFs directly to the patient's phone.
+                    </div>
+                </details>
+            </div>
+        </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final-cta card-3d-reveal">
-      <div class="cta-container card-3d">
-        <h2>Ready to unify your clinic?</h2>
-        <p>Join the hospitals operating faster and safer on Medicus.</p>
-        <div class="cta-buttons">
-          <a href="pricing.html" class="btn btn-primary">Start free trial</a>
-          <a href="contact.html" class="btn btn-ghost">Talk to sales</a>
+    <!-- PREMIUM FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <h3>Ready to streamline your hospital?</h3>
+                <a href="contact.html" class="btn btn-teal">Start Free Today</a>
+            </div>
+            <div class="footer-grid">
+                <div>
+                    <div class="logo"><i class="fa-solid fa-heart-pulse"></i> Medicus</div>
+                    <p style="color: #cbd5e1; font-size: 0.95rem; margin-top: 15px;">Management for teams who run one patient record, not five.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Platform & Roles</h5>
+                    <ul>
+                        <li><a href="#roles"><i class="fa-solid fa-angle-right"></i> Hospital Admin</a></li>
+                        <li><a href="#roles"><i class="fa-solid fa-angle-right"></i> Doctor Console</a></li>
+                        <li><a href="#roles"><i class="fa-solid fa-angle-right"></i> Front Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Features</h5>
+                    <ul>
+                        <li><a href="#modules"><i class="fa-solid fa-angle-right"></i> OPD & IPD Modules</a></li>
+                        <li><a href="#integrations"><i class="fa-solid fa-angle-right"></i> Integrations</a></li>
+                        <li><a href="pricing.html"><i class="fa-solid fa-angle-right"></i> Pricing Plans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><i class="fa-solid fa-building" style="color: var(--teal); margin-right: 8px;"></i> Heartovation Technologies</li>
+                        <li><i class="fa-solid fa-location-dot" style="color: var(--teal); margin-right: 8px;"></i> Ahmedabad, Gujarat, India</li>
+                        <li><a href="contact.html"><i class="fa-solid fa-envelope" style="color: var(--teal); margin-right: 8px;"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">&copy; 2026 Medicus. All rights reserved.</div>
         </div>
-        <p class="trust-microcopy">Secure, compliant, and built for India.</p>
-      </div>
-    </section>
-  </main>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-col brand-col">
-        <a href="/" class="brand-logo" aria-label="Medicus Home">
-          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <span>Medicus</span>
-        </a>
-        <p>The OS for Indian Healthcare.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
-          <a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Product</h4>
-        <ul>
-          <li><a href="features.html#front-desk">Front Desk</a></li>
-          <li><a href="features.html#doctor">Visit Pad</a></li>
-          <li><a href="features.html#admin">Admin Hub</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="contact.html">Contact Sales</a></li>
-          <li><a href="/security">Security</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
-          <li><a href="/terms">Terms of Service</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Medicus. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- LOGIC FOR LIVE TICKER & STEPPER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Live Consults Ticker Simulation
+            const liveConsults = document.getElementById('live-consults');
+            if(liveConsults) {
+                let consults = 842;
+                setInterval(() => {
+                    if(Math.random() > 0.5) {
+                        consults += 1;
+                        liveConsults.innerText = consults.toLocaleString();
+                    }
+                }, 2500);
+            }
 
-  <script src="script.js"></script>
+            // 2. Interactive Stepper Logic ("Modules" section)
+            const stepBtns = document.querySelectorAll('.step-btn');
+            const stepPanels = document.querySelectorAll('.step-panel');
+
+            if(stepBtns.length > 0 && stepPanels.length > 0) {
+                stepBtns.forEach((btn, index) => {
+                    btn.addEventListener('click', () => {
+                        // Remove active from all
+                        stepBtns.forEach(b => b.classList.remove('active'));
+                        stepPanels.forEach(p => p.classList.remove('active'));
+
+                        // Add active to clicked
+                        btn.classList.add('active');
+                        if(stepPanels[index]) stepPanels[index].classList.add('active');
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>

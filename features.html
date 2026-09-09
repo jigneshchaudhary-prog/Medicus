@@ -1,420 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Features — Medicus</title>
-    <meta name="description"
-        content="What each role actually does in Medicus: Front Desk, Doctor, Admin and Super Admin, workflow by workflow.">
+    <title>Product Features — Medicus</title>
+    
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
-</head>
 
+    <!-- Page-Specific Styles for the new Capability Grids & Missing Feature Grids -->
+    <style>
+        /* FIXED: Missing Feature Grid Styles from style.css */
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 60px; }
+        .feature-grid.reverse { direction: rtl; }
+        .feature-grid.reverse > * { direction: ltr; }
+        .f-image { height: 480px; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md, 0 10px 30px rgba(11,42,110,0.15)); }
+        .f-bullets { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 30px; }
+        .f-bullet { background: var(--white, #ffffff); border: 1px solid var(--border, #E2E8F0); padding: 20px 24px; border-radius: 12px; display: flex; align-items: center; gap: 20px; box-shadow: var(--shadow-sm, 0 4px 12px rgba(11,42,110,0.06)); }
+        .f-bullet i { font-size: 1.8rem; color: var(--teal, #00B8C5); width: 35px; text-align: center; }
+        .f-bullet h4 { font-size: 1.15rem; margin-bottom: 0; color: var(--navy, #0B2A6E); }
+        .f-bullet p { margin: 0; font-size: 0.9rem; color: var(--text-muted, #64748B); line-height: 1.5; }
+
+        /* Deep Dive Capability Cards */
+        .capability-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+        .cap-card { background: var(--bg-gray, #F8FAFC); border: 1px solid var(--border, #E2E8F0); padding: 25px; border-radius: 12px; transition: 0.3s; }
+        .cap-card:hover { border-color: var(--teal, #00B8C5); box-shadow: var(--shadow-sm, 0 4px 12px rgba(11,42,110,0.06)); transform: translateY(-3px); background: var(--white, #ffffff); }
+        .cap-card i { font-size: 1.5rem; color: var(--navy, #0B2A6E); margin-bottom: 15px; background: var(--white, #ffffff); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 8px; box-shadow: var(--shadow-sm, 0 4px 12px rgba(11,42,110,0.06)); }
+        .cap-card h4 { font-size: 1.1rem; margin-bottom: 8px; color: var(--navy, #0B2A6E); }
+        .cap-card p { font-size: 0.9rem; color: var(--text-muted, #64748B); line-height: 1.5; margin: 0;}
+
+        /* Platform Basics Area */
+        .platform-basics { background: var(--navy, #0B2A6E); color: var(--white, #ffffff); padding: 100px 0; margin-top: 60px; }
+        .basics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px; }
+        .basic-item { text-align: center; padding: 20px; }
+        .basic-item i { font-size: 2.5rem; color: var(--teal, #00B8C5); margin-bottom: 20px; }
+        .basic-item h4 { color: var(--white, #ffffff); font-size: 1.2rem; margin-bottom: 10px; }
+        .basic-item p { color: #cbd5e1; font-size: 0.95rem; margin: 0;}
+
+        /* Responsive Fixes */
+        @media(max-width: 992px) {
+            .feature-grid { grid-template-columns: 1fr; gap: 40px; }
+            .feature-grid.reverse { direction: ltr; }
+            .f-image { height: auto; max-height: 400px; }
+            .capability-grid { grid-template-columns: 1fr 1fr; }
+            .basics-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media(max-width: 768px) {
+            .capability-grid, .basics-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
 <body>
 
-    <header class="nav" id="nav">
-        <div class="nav__inner">
-            <a href="index.html" class="brand">
-                <svg class="brand__pulse" viewBox="0 0 64 24" width="34" height="14" aria-hidden="true">
-                    <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor"
-                        stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                Medicus
-            </a>
-            <nav class="nav__links" id="navLinks">
-                <a href="index.html#day">How it runs</a>
-                <a href="index.html#roles">Roles</a>
-                <a href="features.html">Product</a>
-                <a href="index.html#security">Security</a>
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Medicus</a>
+            <nav class="nav-links">
+                <a href="index.html">How it runs</a>
+                <a href="features.html" class="active">Product Features</a>
                 <a href="pricing.html">Pricing</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <div class="nav__actions">
-                <a href="#" class="link-btn">Log in</a>
-                <a href="contact.html" class="btn btn--primary btn--sm">Start free</a>
-                <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+            <a href="contact.html" class="btn btn-teal">Start Free</a>
         </div>
     </header>
 
-    <section class="page-hero">
-        <div class="page-hero__inner">
-            <div class="breadcrumb"><a href="index.html">Home</a> / Features</div>
-            <h1>Everything your hospital does, built for the person doing it.</h1>
-            <p>No shared dashboard with every switch turned on. Each role gets exactly the
-                screens their job needs — here's what each one actually looks like day to day.</p>
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <span class="tagline" style="background: rgba(255,255,255,0.2); color: var(--white); border: 1px solid var(--teal);">Role-Based Workspaces</span>
+            <h1 class="title-xl">Built for the person doing the job.</h1>
+            <p>Every role gets exactly the screens their job requires. No cluttered menus, no confusing overlaps. See exactly how your staff will use Medicus daily.</p>
+        </div>
+    </div>
+
+    <!-- FRONT DESK -->
+    <section class="section container">
+        <div class="feature-grid">
+            <div class="f-image">
+                <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?q=80&w=2128&auto=format&fit=crop" alt="Front Desk">
+            </div>
+            <div>
+                <span class="tagline">Frictionless Reception</span>
+                <h2 class="section-title">Front Desk Hub</h2>
+                <p class="section-lead" style="margin:0;">The first and last touchpoint. Manage registrations, queues, and billing seamlessly across the entire clinic.</p>
+                <div class="f-bullets">
+                    <div class="f-bullet">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp OTP Registration</h4>
+                            <p>Secure, fast patient onboarding without the paperwork.</p>
+                        </div>
+                    </div>
+                    <div class="f-bullet">
+                        <i class="fa-solid fa-list-ol"></i>
+                        <div>
+                            <h4>Live Queue Board</h4>
+                            <p>Track flows instantly: Booked → Arrived → On-going → Reviewed.</p>
+                        </div>
+                    </div>
+                    <div class="f-bullet">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        <div>
+                            <h4>Instant Billing</h4>
+                            <p>Convert appointments directly to invoices in one click.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Front Desk Deep Dive Capabilities -->
+        <div class="capability-grid">
+            <div class="cap-card">
+                <i class="fa-solid fa-ticket"></i>
+                <h4>Smart Tokens</h4>
+                <p>Tokens are issued once, at check-in, per doctor, per calendar day. Previews are peek-only.</p>
+            </div>
+            <div class="cap-card">
+                <i class="fa-solid fa-bed"></i>
+                <h4>IPD Admit Desk</h4>
+                <p>Admit a patient, allocate a bed, and schedule the first bedside visit from one screen.</p>
+            </div>
+            <div class="cap-card">
+                <i class="fa-solid fa-percent"></i>
+                <h4>Discount Ceilings</h4>
+                <p>Front desk discounts are capped by policy. Pricing stays controlled at the point of sale.</p>
+            </div>
         </div>
     </section>
 
-    <main>
-
-        <!-- ============ FRONT DESK ============ -->
-        <section id="frontdesk">
-            <div class="section-head is-centered">
-                <h2>Front Desk</h2>
-                <p>The first and last touchpoint of every visit — registration, the queue, and billing.</p>
-            </div>
-
-            <div class="detail-block">
-                <div class="detail-block__head">
-                    <div class="role__bar" style="background:var(--amber)"></div>
-                    <h3>A day at the front desk</h3>
+    <!-- DOCTOR -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="feature-grid reverse">
+                <div class="f-image">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop" alt="Doctor Consultation">
                 </div>
-                <p class="detail-block__intro">From the moment a patient walks in to the moment they're billed, front
-                    desk owns the handoffs — and Medicus keeps every step in one board instead of a notebook, a call
-                    register and a separate billing app.</p>
-
-                <div class="steps">
-                    <div class="step">
-                        <span class="step__num">1</span>
-                        <div class="step__body">
-                            <h4>Register</h4>
-                            <p>Name, age, gender, phone. New patients can go through WhatsApp OTP, or be registered
-                                without OTP when needed.</p>
+                <div>
+                    <span class="tagline">Clinical Precision</span>
+                    <h2 class="section-title">The Doctor Console</h2>
+                    <p class="section-lead" style="margin:0;">Focus strictly on patient care. The unified Visit Pad handles everything from diagnosis to lab orders without switching tabs.</p>
+                    <div class="f-bullets">
+                        <div class="f-bullet">
+                            <i class="fa-solid fa-pen-nib"></i>
+                            <div>
+                                <h4>Draft to Finalise Rx</h4>
+                                <p>Keep notes in draft until finalized. Full version history supported.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="step">
-                        <span class="step__num">2</span>
-                        <div class="step__body">
-                            <h4>Book or walk in</h4>
-                            <p>Pull an open slot that respects the doctor's schedule and leave, or walk the patient
-                                straight into the next free slot.</p>
+                        <div class="f-bullet">
+                            <i class="fa-solid fa-video"></i>
+                            <div>
+                                <h4>LiveKit Referrals</h4>
+                                <p>Bring in specialists instantly over integrated, secure video.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="step">
-                        <span class="step__num">3</span>
-                        <div class="step__body">
-                            <h4>Work the queue</h4>
-                            <p>Booked → Arrived → On‑going → Reviewed, on a shared board doctors see too. Cancel or mark
-                                no‑show without losing the slot's history.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="step__num">4</span>
-                        <div class="step__body">
-                            <h4>Bill</h4>
-                            <p>Create the invoice straight from the appointment's items, collect cash or bank payment,
-                                and send the PDF over WhatsApp.</p>
+                        <div class="f-bullet">
+                            <i class="fa-solid fa-flask-vial"></i>
+                            <div>
+                                <h4>Direct Lab Orders</h4>
+                                <p>Raise orders from the pad and view results as they come in.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="capability-grid">
-                    <div class="capability">
-                        <h4>Token numbers that mean something</h4>
-                        <p>Tokens are issued once, at check‑in, per doctor per calendar day. Any number shown before
-                            that is a preview only.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Discount ceilings</h4>
-                        <p>Front desk discounting is capped by policy; admin isn't limited the same way — so pricing
-                            stays controlled at the point of sale.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>IPD admit desk</h4>
-                        <p>Admit a patient, allocate a bed, and schedule the doctor's first bedside visit — all from the
-                            same desk that handles OPD.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Discharge paperwork</h4>
-                        <p>Handle discharge documentation from the admission page itself, once billing is clear.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ DOCTOR ============ -->
-        <section id="doctor">
-            <div class="section-head is-centered">
-                <h2>Doctor</h2>
-                <p>Consults, the Visit Pad, lab orders, bedside visits and referrals — one queue to work through.</p>
             </div>
 
-            <div class="detail-block">
-                <div class="detail-block__head">
-                    <div class="role__bar" style="background:var(--teal)"></div>
-                    <h3>A day of consults</h3>
+            <!-- Doctor Deep Dive Capabilities -->
+            <div class="capability-grid">
+                <div class="cap-card">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <h4>Walk-in Ready</h4>
+                    <p>A doctor adding a patient directly creates a walk-in appointment for themselves. No extra steps.</p>
                 </div>
-                <p class="detail-block__intro">A doctor's dashboard opens on "my day" — the queue, pending tasks, and
-                    any inpatient visits due. Owner-doctors also get Operations and Finance views without leaving their
-                    login.</p>
-
-                <div class="steps">
-                    <div class="step">
-                        <span class="step__num">1</span>
-                        <div class="step__body">
-                            <h4>Open the queue</h4>
-                            <p>See who's Arrived and next, alongside any IPD bedside visits scheduled for today.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="step__num">2</span>
-                        <div class="step__body">
-                            <h4>Write the Visit Pad</h4>
-                            <p>Diagnosis, medicines, lab orders, diagrams and attachments — saved as a draft until
-                                you're ready to commit.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="step__num">3</span>
-                        <div class="step__body">
-                            <h4>Finalise the Rx</h4>
-                            <p>Finalising moves the visit to Reviewed. Need to change something after? Amend it — the
-                                prior version is kept, not overwritten.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="step__num">4</span>
-                        <div class="step__body">
-                            <h4>Refer, if needed</h4>
-                            <p>Bring in another doctor live over video, or send an offline referral — a WhatsApp Rx
-                                snapshot plus the referred doctor's contact details.</p>
-                        </div>
-                    </div>
+                <div class="cap-card">
+                    <i class="fa-solid fa-bed-pulse"></i>
+                    <h4>Bedside Visits</h4>
+                    <p>Complete scheduled IPD bedside visits and write prescriptions linked to that specific admission.</p>
                 </div>
-
-                <div class="capability-grid">
-                    <div class="capability">
-                        <h4>Add patient = walk‑in</h4>
-                        <p>A doctor adding a patient directly creates a walk‑in appointment for themselves — no separate
-                            "new patient" flow to learn.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Final Rx only, in lists</h4>
-                        <p>Consults and prescriptions lists only ever show the finalised record — drafts stay out of the
-                            way until you're done.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Lab ordering and review</h4>
-                        <p>Order labs straight from the Visit Pad and review results as they come back, without
-                            switching systems.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>IPD bedside visits</h4>
-                        <p>Complete a scheduled bedside visit and write a prescription linked to that specific visit and
-                            admission.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Invite to Medicus</h4>
-                        <p>A personal referral link lets a doctor invite peers or their own second clinic onto the
-                            platform.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Works offline</h4>
-                        <p>Adding a patient, running a consult and writing a prescription keep working without a
-                            connection, and sync once you're back online.</p>
-                    </div>
+                <div class="cap-card">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <h4>Rx Versioning</h4>
+                    <p>Need to change a finalized prescription? Amend it. The prior version is securely kept, never overwritten.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- ============ ADMIN ============ -->
-        <section id="admin">
-            <div class="section-head is-centered">
-                <h2>Admin</h2>
-                <p>Runs the hospital's operations — staff, pricing, branding, data — and can step into any other view.
-                </p>
-            </div>
-
-            <div class="detail-block">
-                <div class="detail-block__head">
-                    <div class="role__bar" style="background:var(--navy)"></div>
-                    <h3>Running the hospital, not just the software</h3>
-                </div>
-                <p class="detail-block__intro">Admin owns everything that keeps the hospital operating correctly behind
-                    the scenes, and can switch into Doctor or Front Desk view directly — the setup most small and
-                    mid‑sized hospitals actually use.</p>
-
-                <div class="capability-grid">
-                    <div class="capability">
-                        <h4>Staff & seats</h4>
-                        <p>Invite staff by email set‑password or a temporary password. Seats are capped by your plan;
-                            deactivating a staff member frees one back up.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Masters → Services</h4>
-                        <p>The single price list — fee, tax and billing category per service. Doctors never set their
-                            own fees; pricing stays consistent hospital‑wide.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Branding & Rx layout</h4>
-                        <p>Letterhead, prescription layout, tax settings, working hours and your WhatsApp sender
-                            identity, all from Settings.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>ABDM & HFR</h4>
-                        <p>Configure your Health Facility Registry ID and ABDM settings as your hospital moves onto
-                            India's national health interchange.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Data Hub</h4>
-                        <p>Import existing patient records from Excel or CSV — with optional automatic column
-                            classification — and export any time.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Support, direct to Medicus</h4>
-                        <p>Support tickets go straight to the Medicus platform team, not a shared inbox.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ SUPER ADMIN ============ -->
-        <section id="superadmin">
-            <div class="section-head is-centered">
-                <h2>Super Admin</h2>
-                <p>The platform layer — for whoever runs Medicus itself, or a group operating many hospitals.</p>
-            </div>
-
-            <div class="detail-block">
-                <div class="detail-block__head">
-                    <div class="role__bar" style="background:var(--slate)"></div>
-                    <h3>Commercial visibility, without clinical access</h3>
-                </div>
-                <p class="detail-block__intro">Super Admin sees the business of running a hospital platform — tenants,
-                    plans, revenue — and is structurally kept out of patient data unless a specific, audited session is
-                    opened.</p>
-
-                <div class="capability-grid">
-                    <div class="capability">
-                        <h4>Tenant management</h4>
-                        <p>Create, suspend, or open any hospital tenant on the platform.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Plans & subscriptions</h4>
-                        <p>Set locked pages, seat counts and free/paid status per plan, and manage each hospital's
-                            subscription and invoices.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Audited impersonation</h4>
-                        <p>Step into a hospital's account for up to 60 minutes to help directly — every session and
-                            every write is logged.</p>
-                    </div>
-                    <div class="capability">
-                        <h4>Platform dashboard</h4>
-                        <p>MRR, ARR, plan mix and collections across every hospital — commercial KPIs only, never
-                            patient records.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ TECHNICAL CAPABILITIES ============ -->
-        <section id="platform">
-            <div class="section-head is-centered">
-                <h2>Underneath, the platform basics are covered</h2>
-            </div>
-            <div class="integration-grid">
-                <div class="integration">
-                    <span class="integration__icon">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
-                            stroke-width="1.6">
-                            <path
-                                d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
-                        </svg>
-                    </span>
-                    <h4>Realtime by default</h4>
-                    <p>Queue and appointment changes push out live, so front desk and doctor screens never fall out of
-                        sync.</p>
-                </div>
-                <div class="integration">
-                    <span class="integration__icon">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
-                            stroke-width="1.6">
-                            <rect x="3" y="4" width="18" height="14" rx="2" />
-                            <path d="M8 21h8M12 18v3" />
-                        </svg>
-                    </span>
-                    <h4>Works through a dropped connection</h4>
-                    <p>Adding a patient, consulting, prescribing and billing all queue locally and sync automatically
-                        once you're back online.</p>
-                </div>
-                <div class="integration">
-                    <span class="integration__icon">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
-                            stroke-width="1.6">
-                            <path d="M3 3v18h18" />
-                            <path d="M7 15l4-5 3 3 5-7" />
-                        </svg>
-                    </span>
-                    <h4>Consistent dates, everywhere</h4>
-                    <p>Every screen displays dates DD/MM/YYYY; every filter reads your local day, not UTC midnight.</p>
-                </div>
-                <div class="integration">
-                    <span class="integration__icon">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
-                            stroke-width="1.6">
-                            <path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z" />
-                            <path d="M19 11a7 7 0 0 1-14 0M12 19v3" />
-                        </svg>
-                    </span>
-                    <h4>Clear status colours</h4>
-                    <p>Booked, Arrived, Reviewed, Paid — the same fixed colours across every board, so status is legible
-                        at a glance.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ CTA ============ -->
-        <section class="cta">
-            <div class="cta__inner">
-                <h2>See these workflows on your own hospital's data.</h2>
-                <p>Start free, invite your team, and walk through a real OPD day in minutes.</p>
-                <div class="cta__actions">
-                    <a href="#" class="btn btn--primary btn--lg">Create your free hospital</a>
-                    <a href="contact.html" class="btn btn--ghost-dark btn--lg">Talk to sales</a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="footer">
-        <div class="footer__inner">
-            <div class="footer__brand">
-                <a href="index.html" class="brand brand--footer">
-                    <svg class="brand__pulse" viewBox="0 0 64 24" width="30" height="12" aria-hidden="true">
-                        <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor"
-                            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    Medicus
-                </a>
-                <p>Practice and hospital management for teams who run one patient record, not five.</p>
-            </div>
-            <div class="footer__col">
-                <h4>Product</h4>
-                <a href="index.html#day">How it runs</a>
-                <a href="features.html">Features</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="index.html#security">Security</a>
-            </div>
-            <div class="footer__col">
-                <h4>Solutions</h4>
-                <a href="features.html#doctor">Hospitals</a>
-                <a href="features.html#frontdesk">Polyclinics</a>
-                <a href="features.html#admin">Diagnostic centres</a>
-            </div>
-            <div class="footer__col">
-                <h4>Company</h4>
-                <a href="contact.html">Contact</a>
-                <a href="pricing.html#faq">Pricing FAQ</a>
-                <a href="index.html#faq">Product FAQ</a>
             </div>
         </div>
-        <div class="footer__bottom">
-            <span>© 2026 Medicus. All rights reserved.</span>
-            <span>Made for hospitals, polyclinics and diagnostic centres.</span>
+    </section>
+
+    <!-- ADMIN -->
+    <section class="section container">
+        <div class="feature-grid">
+            <div class="f-image">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Hospital Admin">
+            </div>
+            <div>
+                <span class="tagline">Control Center</span>
+                <h2 class="section-title">Hospital Admin</h2>
+                <p class="section-lead" style="margin:0;">Run the hospital's operations smoothly. You have full control over staff, branding, masters, and data.</p>
+                <div class="f-bullets">
+                    <div class="f-bullet">
+                        <i class="fa-solid fa-tags"></i>
+                        <div>
+                            <h4>Centralized Master Pricing</h4>
+                            <p>Doctors don't set fees. You control the single service price list.</p>
+                        </div>
+                    </div>
+                    <div class="f-bullet">
+                        <i class="fa-solid fa-users-gear"></i>
+                        <div>
+                            <h4>Staff Seat Management</h4>
+                            <p>Easily invite staff and manage access limits based on your plan.</p>
+                        </div>
+                    </div>
+                    <div class="f-bullet">
+                        <i class="fa-solid fa-file-csv"></i>
+                        <div>
+                            <h4>Data Hub</h4>
+                            <p>Import patient records instantly via Excel or CSV workflows.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Deep Dive Capabilities -->
+        <div class="capability-grid">
+            <div class="cap-card">
+                <i class="fa-solid fa-id-card"></i>
+                <h4>ABDM & HFR Integration</h4>
+                <p>Configure your Health Facility Registry ID and connect with India's national health interchange seamlessly.</p>
+            </div>
+            <div class="cap-card">
+                <i class="fa-solid fa-palette"></i>
+                <h4>Branding & Layouts</h4>
+                <p>Customize your hospital's letterhead, prescription layouts, tax settings, and WhatsApp sender identity.</p>
+            </div>
+            <div class="cap-card">
+                <i class="fa-solid fa-toggle-on"></i>
+                <h4>Role Switching</h4>
+                <p>Hospital owners can switch instantly between Admin, Doctor, or Front Desk views without changing logins.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLATFORM BASICS -->
+    <section class="platform-basics">
+        <div class="container">
+            <div class="text-center">
+                <span class="tagline" style="background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid var(--teal);">Under the Hood</span>
+                <h2 class="section-title" style="color: var(--white);">How the Platform Connects It All</h2>
+                <p class="section-lead" style="color: #cbd5e1;">Medicus isn't just screens; it's a living ecosystem. Here is how the technology supports your daily operations.</p>
+            </div>
+
+            <div class="basics-grid">
+                <div class="basic-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h4>Real-time by Default</h4>
+                    <p>Queue and appointment changes push live instantly. The front desk and doctor screens never fall out of sync.</p>
+                </div>
+                <div class="basic-item">
+                    <i class="fa-solid fa-wifi"></i>
+                    <h4>Works Offline</h4>
+                    <p>Adding a patient, consulting, prescribing, and billing all queue locally if the internet drops, and sync when online.</p>
+                </div>
+                <div class="basic-item">
+                    <i class="fa-solid fa-palette"></i>
+                    <h4>Clear Status Colors</h4>
+                    <p>Booked (Slate), Arrived (Amber), Paid (Emerald). Consistent, fixed visual cues across the entire hospital.</p>
+                </div>
+                <div class="basic-item">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <h4>Consistent Dates</h4>
+                    <p>Every screen displays dates in standard DD/MM/YYYY format. Filters read your local day, not UTC midnight.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <h3>Ready to streamline your hospital?</h3>
+                <a href="contact.html" class="btn btn-teal">Start Free Today</a>
+            </div>
+            <div class="footer-grid">
+                <div>
+                    <div class="logo"><i class="fa-solid fa-heart-pulse"></i> Medicus</div>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 15px;">Management for teams who run one patient record, not five.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Product</h5>
+                    <ul>
+                        <li><a href="index.html">How it runs</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Workspaces</h5>
+                    <ul>
+                        <li><a href="features.html">Hospital Admin</a></li>
+                        <li><a href="features.html">Doctor Console</a></li>
+                        <li><a href="features.html">Front Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><i class="fa-solid fa-building"></i> Heartovation Technologies</li>
+                        <li><i class="fa-solid fa-location-dot"></i> Ahmedabad, Gujarat, India</li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">&copy; 2026 Medicus. All rights reserved.</div>
         </div>
     </footer>
-
+    
     <script src="script.js"></script>
 </body>
-
 </html>

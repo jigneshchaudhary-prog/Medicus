@@ -1,286 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing — Medicus</title>
-    <meta name="description"
-        content="Start free, upgrade when you need more seats or inpatient features. Plan comparison for Medicus hospital management software.">
+    
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
-</head>
+    
+    <style>
+        /* --- Pricing Specific Styles --- */
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: -80px; position: relative; z-index: 20; }
+        .p-card { background: var(--white, #ffffff); border: 1px solid var(--border, #E2E8F0); border-radius: 16px; padding: 40px; box-shadow: var(--shadow-sm, 0 4px 12px rgba(11,42,110,0.06)); transition: 0.3s; }
+        .p-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md, 0 10px 30px rgba(11,42,110,0.15)); border-color: var(--teal, #00B8C5); }
+        .p-card.highlight { border-top: 6px solid var(--teal, #00B8C5); }
+        .p-card h3 { font-size: 2.2rem; margin-bottom: 10px; color: var(--navy, #0B2A6E); }
+        .p-card ul { margin: 30px 0; list-style: none; padding: 0; }
+        .p-card ul li { margin-bottom: 15px; display: flex; gap: 12px; font-weight: 500; color: var(--text-dark, #0F172A); }
+        .p-card ul li i { color: var(--teal, #00B8C5); margin-top: 5px; }
+        
+        /* --- Comparison Table Styles --- */
+        .compare-table { width: 100%; border-collapse: collapse; margin-top: 50px; background: var(--white, #ffffff); box-shadow: var(--shadow-sm); border-radius: 12px; overflow: hidden; border: 1px solid var(--border, #E2E8F0); }
+        .compare-table th, .compare-table td { padding: 20px 24px; text-align: left; border-bottom: 1px solid var(--border, #E2E8F0); }
+        .compare-table th { background: var(--bg-gray, #F8FAFC); color: var(--navy, #0B2A6E); font-family: 'Outfit', sans-serif; font-size: 1.1rem; }
+        .compare-table td { color: var(--text-dark, #0F172A); }
+        .compare-table td.check { color: var(--teal, #00B8C5); font-size: 1.2rem; }
+        .compare-table td.dash { color: var(--text-muted, #64748B); font-weight: 600; }
+        
+        /* --- FIX: Missing Hero & Footer Styles from style.css --- */
+        .page-hero { position: relative; padding: 120px 0 140px; background: var(--navy, #0B2A6E); color: var(--white, #ffffff); text-align: center; }
+        .page-hero h1 { color: var(--white, #ffffff) !important; font-size: 3.5rem; margin-bottom: 20px; }
+        .page-hero p { color: #cbd5e1; font-size: 1.2rem; max-width: 800px; margin: 0 auto; }
+        
+        footer { background: var(--navy-dark, #071b45); color: var(--white, #ffffff); padding: 80px 0 30px; margin-top: 80px; }
+        footer h3, footer h5, footer .logo { color: var(--white, #ffffff) !important; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 20px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding: 40px 0; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 12px; color: #cbd5e1; font-size: 0.95rem; }
+        .footer-col ul li a { color: #cbd5e1; text-decoration: none; transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--teal, #00B8C5); }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; color: #cbd5e1; font-size: 0.9rem; }
 
+        @media(max-width: 992px) { 
+            .pricing-grid { grid-template-columns: 1fr; margin-top: 20px; } 
+            .compare-table { display: block; overflow-x: auto; } 
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .page-hero { padding: 100px 24px; }
+        }
+        @media(max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-top { flex-direction: column; align-items: flex-start; }
+            .page-hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
 <body>
 
-    <header class="nav" id="nav">
-        <div class="nav__inner">
-            <a href="index.html" class="brand">
-                <svg class="brand__pulse" viewBox="0 0 64 24" width="34" height="14" aria-hidden="true">
-                    <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor"
-                        stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                Medicus
-            </a>
-            <nav class="nav__links" id="navLinks">
-                <a href="index.html#day">How it runs</a>
-                <a href="index.html#roles">Roles</a>
-                <a href="features.html">Product</a>
-                <a href="index.html#security">Security</a>
-                <a href="pricing.html">Pricing</a>
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Medicus</a>
+            <nav class="nav-links">
+                <a href="index.html">How it runs</a>
+                <a href="features.html">Product Features</a>
+                <a href="pricing.html" class="active">Pricing</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <div class="nav__actions">
-                <a href="#" class="link-btn">Log in</a>
-                <a href="contact.html" class="btn btn--primary btn--sm">Start free</a>
-                <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+            <a href="contact.html" class="btn btn-teal">Start Free</a>
         </div>
     </header>
 
-    <section class="page-hero">
-        <div class="page-hero__inner">
-            <div class="breadcrumb"><a href="index.html">Home</a> / Pricing</div>
-            <h1>Start free. Pay only once you need more.</h1>
-            <p>Every hospital signs up onto the free plan automatically — no card, no
-                sales call. Upgrade from Admin → Subscription whenever a locked page or
-                a full seat count says it's time.</p>
+    <div class="page-hero">
+        <div class="container">
+            <h1>Start free. Pay when you grow.</h1>
+            <p>Every hospital signs up onto the free plan automatically — no card, no sales call required. Upgrade from Admin settings whenever you need more seats.</p>
         </div>
+    </div>
+
+    <section class="container" style="padding-bottom: 100px;">
+        <div class="pricing-grid">
+            <!-- Free Plan -->
+            <div class="p-card">
+                <h3>Free</h3>
+                <p style="color: var(--text-muted, #64748B);">For a single clinic finding its feet.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> OPD queue, booking & walk-ins</li>
+                    <li><i class="fa-solid fa-check"></i> Visit Pad & Prescriptions</li>
+                    <li><i class="fa-solid fa-check"></i> Billing from appointment</li>
+                    <li><i class="fa-solid fa-check"></i> Limited staff seats</li>
+                </ul>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; justify-content: center;">Start Free</a>
+            </div>
+
+            <!-- Growth Plan -->
+            <div class="p-card highlight">
+                <span class="tagline">Most Hospitals Land Here</span>
+                <h3>Growth</h3>
+                <p style="color: var(--text-muted, #64748B);">For a hospital running OPD and IPD.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Everything in Free</li>
+                    <li><i class="fa-solid fa-check"></i> IPD Admissions & Beds</li>
+                    <li><i class="fa-solid fa-check"></i> WhatsApp Rx & OTP</li>
+                    <li><i class="fa-solid fa-check"></i> Lab Ordering & Results</li>
+                    <li><i class="fa-solid fa-check"></i> Standard staff seats</li>
+                </ul>
+                <a href="contact.html" class="btn btn-teal" style="width: 100%; justify-content: center;">Start Free Trial</a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="p-card">
+                <h3>Enterprise</h3>
+                <p style="color: var(--text-muted, #64748B);">For hospital groups & chains.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Everything in Growth</li>
+                    <li><i class="fa-solid fa-check"></i> Multi-branch tenants</li>
+                    <li><i class="fa-solid fa-check"></i> ABDM / ABHA Ready</li>
+                    <li><i class="fa-solid fa-check"></i> Data Hub import/export</li>
+                    <li><i class="fa-solid fa-check"></i> Custom seat caps</li>
+                </ul>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; justify-content: center;">Talk to Sales</a>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 100px; margin-bottom: 20px;">
+            <h2 class="title-lg" style="font-size: 2.5rem; color: var(--navy, #0B2A6E);">Compare Plans</h2>
+        </div>
+        
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Free</th>
+                    <th>Growth</th>
+                    <th>Enterprise</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Staff seats</td><td style="font-weight:600;">Limited</td><td style="font-weight:600;">Standard</td><td style="font-weight:600;">Custom</td></tr>
+                <tr><td>OPD queue & booking</td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>Visit Pad & prescriptions</td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>OPD billing</td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>Lab ordering & results</td><td class="dash">—</td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>Inpatient admission, beds, discharge</td><td class="dash">—</td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>WhatsApp notifications</td><td class="dash">—</td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>Doctor referrals (video & offline)</td><td class="dash">—</td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>Data Hub import/export</td><td class="dash">—</td><td class="check"><i class="fa-solid fa-check"></i></td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>Multi-branch tenants</td><td class="dash">—</td><td class="dash">—</td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+                <tr><td>ABDM / ABHA & HFR</td><td class="dash">—</td><td class="dash">—</td><td class="check"><i class="fa-solid fa-check"></i></td></tr>
+            </tbody>
+        </table>
     </section>
 
-    <main>
-
-        <!-- ============ PLAN CARDS ============ -->
-        <section class="pricing" id="plans">
-            <div class="plan-grid">
-                <div class="plan">
-                    <h3>Free</h3>
-                    <p class="plan__desc">For a single clinic finding its feet.</p>
-                    <ul class="plan__list">
-                        <li>Front desk, doctor and admin logins</li>
-                        <li>OPD queue, booking and walk‑ins</li>
-                        <li>Visit Pad and finalised prescriptions</li>
-                        <li>Billing from the appointment</li>
-                        <li>Limited staff seats</li>
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <h3>Ready to streamline your hospital?</h3>
+                <a href="contact.html" class="btn btn-teal">Start Free Today</a>
+            </div>
+            <div class="footer-grid">
+                <div>
+                    <div class="logo"><i class="fa-solid fa-heart-pulse"></i> Medicus</div>
+                    <p style="color: #cbd5e1; font-size: 0.95rem; margin-top: 15px;">Management for teams who run one patient record, not five.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Product</h5>
+                    <ul>
+                        <li><a href="index.html">How it runs</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
                     </ul>
-                    <a href="contact.html" class="btn btn--outline">Start free</a>
                 </div>
-
-                <div class="plan plan--highlight">
-                    <div class="plan__badge">Most hospitals land here</div>
-                    <h3>Growth</h3>
-                    <p class="plan__desc">For a hospital running OPD and IPD together.</p>
-                    <ul class="plan__list">
-                        <li>Everything in Free</li>
-                        <li>Inpatient admissions, beds and discharge</li>
-                        <li>Lab ordering and result review</li>
-                        <li>WhatsApp reminders, OTP and invoices</li>
-                        <li>Doctor referrals, online and offline</li>
-                        <li>More staff seats</li>
+                <div class="footer-col">
+                    <h5>Workspaces</h5>
+                    <ul>
+                        <li><a href="features.html">Hospital Admin</a></li>
+                        <li><a href="features.html">Doctor Console</a></li>
+                        <li><a href="features.html">Front Desk</a></li>
                     </ul>
-                    <a href="contact.html" class="btn btn--primary">Start free</a>
                 </div>
-
-                <div class="plan">
-                    <h3>Enterprise</h3>
-                    <p class="plan__desc">For hospital groups and diagnostic chains.</p>
-                    <ul class="plan__list">
-                        <li>Everything in Growth</li>
-                        <li>Multi‑branch and higher seat caps</li>
-                        <li>ABDM / ABHA and HFR configuration</li>
-                        <li>Data Hub import/export at scale</li>
-                        <li>Priority support</li>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><i class="fa-solid fa-building" style="margin-right: 8px;"></i> Heartovation Technologies</li>
+                        <li><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Ahmedabad, Gujarat, India</li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
-                    <a href="contact.html" class="btn btn--outline">Talk to us</a>
                 </div>
             </div>
-        </section>
-
-        <!-- ============ COMPARISON TABLE ============ -->
-        <section id="compare">
-            <div class="section-head is-centered">
-                <h2>Compare plans in detail</h2>
-            </div>
-            <div class="compare-wrap">
-                <table class="compare">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Free</th>
-                            <th>Growth</th>
-                            <th>Enterprise</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>Staff seats</th>
-                            <td>Limited</td>
-                            <td>Standard</td>
-                            <td>Custom</td>
-                        </tr>
-                        <tr>
-                            <th>OPD queue &amp; booking</th>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>Visit Pad &amp; prescriptions</th>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>OPD billing</th>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>Lab ordering &amp; results</th>
-                            <td class="no">—</td>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>Inpatient admission, beds, discharge</th>
-                            <td class="no">—</td>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>WhatsApp notifications</th>
-                            <td class="no">—</td>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>Doctor referrals (video &amp; offline)</th>
-                            <td class="no">—</td>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>Data Hub import/export</th>
-                            <td class="no">—</td>
-                            <td class="yes">✓</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>Multi‑branch tenants</th>
-                            <td class="no">—</td>
-                            <td class="no">—</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>ABDM / ABHA &amp; HFR</th>
-                            <td class="no">—</td>
-                            <td class="no">—</td>
-                            <td class="yes">✓</td>
-                        </tr>
-                        <tr>
-                            <th>Support</th>
-                            <td>Community</td>
-                            <td>Standard</td>
-                            <td>Priority</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- ============ PRICING FAQ ============ -->
-        <section id="faq">
-            <div class="section-head is-centered">
-                <h2>Pricing questions</h2>
-            </div>
-            <div class="faq-list">
-                <details class="faq-item">
-                    <summary>What happens when a feature is locked on our plan?</summary>
-                    <p>You'll see a locked page in the navigation instead of a broken one — clicking it explains what
-                        the feature does and takes you to upgrade. Nothing fails silently.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What happens when we run out of seats?</summary>
-                    <p>New staff invites are blocked until you either deactivate an existing seat to free one up, or
-                        upgrade to a plan with more seats.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Can we downgrade later?</summary>
-                    <p>Yes, from Admin → Subscription. Downgrading may re‑lock features tied to the higher plan, so
-                        anything actively in use is worth reviewing first.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Is there a setup fee?</summary>
-                    <p>No. Signup assigns the free plan automatically with no payment step. You only pay when you choose
-                        to upgrade.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Do you offer pricing per hospital group?</summary>
-                    <p>Yes — Enterprise plans are set up for multi‑branch hospital groups and diagnostic chains. Talk to
-                        us for a plan that matches your number of branches and seats.</p>
-                </details>
-            </div>
-        </section>
-
-        <section class="cta">
-            <div class="cta__inner">
-                <h2>Your hospital's free workspace is a few minutes away.</h2>
-                <p>No card, no sales call required to start on the free plan.</p>
-                <div class="cta__actions">
-                    <a href="#" class="btn btn--primary btn--lg">Create your free hospital</a>
-                    <a href="contact.html" class="btn btn--ghost-dark btn--lg">Talk to sales</a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="footer">
-        <div class="footer__inner">
-            <div class="footer__brand">
-                <a href="index.html" class="brand brand--footer">
-                    <svg class="brand__pulse" viewBox="0 0 64 24" width="30" height="12" aria-hidden="true">
-                        <polyline points="0,12 14,12 19,3 25,21 30,12 64,12" fill="none" stroke="currentColor"
-                            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    Medicus
-                </a>
-                <p>Practice and hospital management for teams who run one patient record, not five.</p>
-            </div>
-            <div class="footer__col">
-                <h4>Product</h4>
-                <a href="index.html#day">How it runs</a>
-                <a href="features.html">Features</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="index.html#security">Security</a>
-            </div>
-            <div class="footer__col">
-                <h4>Solutions</h4>
-                <a href="features.html#doctor">Hospitals</a>
-                <a href="features.html#frontdesk">Polyclinics</a>
-                <a href="features.html#admin">Diagnostic centres</a>
-            </div>
-            <div class="footer__col">
-                <h4>Company</h4>
-                <a href="contact.html">Contact</a>
-                <a href="pricing.html#faq">Pricing FAQ</a>
-                <a href="index.html#faq">Product FAQ</a>
-            </div>
-        </div>
-        <div class="footer__bottom">
-            <span>© 2026 Medicus. All rights reserved.</span>
-            <span>Made for hospitals, polyclinics and diagnostic centres.</span>
+            <div class="copyright">&copy; 2026 Medicus. All rights reserved.</div>
         </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
-
 </html>
